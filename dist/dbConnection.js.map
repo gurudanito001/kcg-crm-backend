@@ -1,1 +1,1 @@
-{"version":3,"file":"dbConnection.js","sourceRoot":"","sources":["../src/dbConnection.ts"],"names":[],"mappings":";;AACA,yCAAsC;AAEtC,MAAM,SAAS,GAAG,IAAI,qBAAS,CAAC,+DAA+D,EAAE,EAAC,OAAO,EAAE,KAAK,EAAC,CAAC,CAAA;AAElH;;;MAGM;AAEN,kBAAe,SAAS,CAAA"}
+{"version":3,"file":"dbConnection.js","sourceRoot":"","sources":["../src/dbConnection.ts"],"names":[],"mappings":";;AACA,yCAAsC;AAEtC,MAAM,SAAS,GAAG,IAAI,qBAAS,CAAC,wHAAwH,EAAE,EAAC,OAAO,EAAE,KAAK,EAAC,CAAC,CAAA;AAE3K;;;MAGM;AAEN,kBAAe,SAAS,CAAA"}
