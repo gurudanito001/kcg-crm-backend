@@ -1,11 +1,22 @@
 import Product from "../models/product.model";
 import Interfaces  from "../interfaces";
 import { Request, Response } from "express";
+import { uploadImage } from "../services/imageService";
 
 class Controller {
   public async create(req: Request, res: Response){
     let data = req.body;
     try {
+      if(data.images.length > 0){
+        let productImagesUrls = await Promise.all(
+          data.images.map(async (base64Img: any) => {
+            let image = await uploadImage({data: base64Img});
+            return image.secure_url;
+          })
+        )
+        data.images = productImagesUrls;
+      }
+      
       let savedData = await Product.create(data); 
       if(savedData){
         return res.status(201).json({
@@ -16,7 +27,7 @@ class Controller {
         })
       }
     } catch (error: any) {
-      return res.status(400).json({message: error.errors[0].message})
+      return res.status(400).json({message: error.message})
     }
   }
 
@@ -33,7 +44,7 @@ class Controller {
         })
       }
     } catch (error: any) {
-      return res.status(400).json({message: error.errors[0].message})
+      return res.status(400).json({message: error.message})
     }
   }
 
@@ -50,7 +61,7 @@ class Controller {
         })
       }
     } catch (error: any) {
-      return res.status(400).json({message: error.errors[0].message})
+      return res.status(400).json({message: error.message})
     }
   }
 
@@ -70,7 +81,7 @@ class Controller {
         })
       }
     } catch (error: any) {
-      return res.status(400).json({message: error.errors[0].message})
+      return res.status(400).json({message: error.message})
     }
   }
 
@@ -89,7 +100,7 @@ class Controller {
         })
       }
     } catch (error: any) {
-      return res.status(400).json({message: error.errors[0].message})
+      return res.status(400).json({message: error.message})
     }
   }
   

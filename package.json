@@ -4,6 +4,10 @@
   "description": "crm backend project for a client",
   "main": "server.js",
   "type": "commonjs",
+  "engines": {
+    "npm": ">=8.0.0 <9.0.0",
+    "node": ">=16.0.0 <17.0.0"
+  },
   "scripts": {
     "test": "mocha -r ts-node/register tests/**/*.spec.ts",
     "build": "npx tsc",

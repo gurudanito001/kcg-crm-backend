@@ -13,11 +13,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const product_model_1 = __importDefault(require("../models/product.model"));
+const imageService_1 = require("../services/imageService");
 class Controller {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let data = req.body;
             try {
+                if (data.images.length > 0) {
+                    let productImagesUrls = yield Promise.all(data.images.map((base64Img) => __awaiter(this, void 0, void 0, function* () {
+                        let image = yield (0, imageService_1.uploadImage)({ data: base64Img });
+                        return image.secure_url;
+                    })));
+                    data.images = productImagesUrls;
+                }
                 let savedData = yield product_model_1.default.create(data);
                 if (savedData) {
                     return res.status(201).json({
@@ -29,7 +37,7 @@ class Controller {
                 }
             }
             catch (error) {
-                return res.status(400).json({ message: error.errors[0].message });
+                return res.status(400).json({ message: error.message });
             }
         });
     }
@@ -48,7 +56,7 @@ class Controller {
                 }
             }
             catch (error) {
-                return res.status(400).json({ message: error.errors[0].message });
+                return res.status(400).json({ message: error.message });
             }
         });
     }
@@ -67,7 +75,7 @@ class Controller {
                 }
             }
             catch (error) {
-                return res.status(400).json({ message: error.errors[0].message });
+                return res.status(400).json({ message: error.message });
             }
         });
     }
@@ -89,7 +97,7 @@ class Controller {
                 }
             }
             catch (error) {
-                return res.status(400).json({ message: error.errors[0].message });
+                return res.status(400).json({ message: error.message });
             }
         });
     }
@@ -110,7 +118,7 @@ class Controller {
                 }
             }
             catch (error) {
-                return res.status(400).json({ message: error.errors[0].message });
+                return res.status(400).json({ message: error.message });
             }
         });
     }

@@ -161,8 +161,4 @@ app.put('/visitPlan/:id', VisitPlanController.updateOne);
 app.delete('/visitPlan/:id', VisitPlanController.deleteOne);
 
 
-
-
-
-
 export default app;

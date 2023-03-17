@@ -32,7 +32,7 @@ import sequelize from "../dbConnection";
       type: DataTypes.STRING,
     },
     specifications: {
-      type: DataTypes.UUID,
+      type: DataTypes.STRING,
     },
     brochures: {
       type: DataTypes.ARRAY(DataTypes.STRING),
@@ -40,14 +40,14 @@ import sequelize from "../dbConnection";
     images: {
       type: DataTypes.ARRAY(DataTypes.STRING),
     },
-    listPriceForProduct: {
-      type: DataTypes.ARRAY(DataTypes.JSON),
+    price: {
+      type: DataTypes.STRING,
     },
     vatInclusive: {
       type: DataTypes.BOOLEAN,
     },
     vatRate: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     extraData: {
       type: DataTypes.JSONB,
@@ -57,5 +57,5 @@ import sequelize from "../dbConnection";
     modelName: 'Product',
   });
 
-  Product.sync().then(()=>console.log("Product was successfully synced"));
+  Product.sync({force: true}).then(()=>console.log("Product was successfully synced"));
 

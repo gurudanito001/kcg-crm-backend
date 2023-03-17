@@ -36,7 +36,7 @@ Product.init({
         type: sequelize_1.DataTypes.STRING,
     },
     specifications: {
-        type: sequelize_1.DataTypes.UUID,
+        type: sequelize_1.DataTypes.STRING,
     },
     brochures: {
         type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
@@ -44,14 +44,14 @@ Product.init({
     images: {
         type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
     },
-    listPriceForProduct: {
-        type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSON),
+    price: {
+        type: sequelize_1.DataTypes.STRING,
     },
     vatInclusive: {
         type: sequelize_1.DataTypes.BOOLEAN,
     },
     vatRate: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.STRING,
     },
     extraData: {
         type: sequelize_1.DataTypes.JSONB,
@@ -60,5 +60,5 @@ Product.init({
     sequelize: dbConnection_1.default,
     modelName: 'Product',
 });
-Product.sync().then(() => console.log("Product was successfully synced"));
+Product.sync({ force: true }).then(() => console.log("Product was successfully synced"));
 //# sourceMappingURL=product.model.js.map
