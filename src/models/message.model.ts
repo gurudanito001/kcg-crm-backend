@@ -2,9 +2,9 @@ import { Sequelize, DataTypes, Model } from 'sequelize'
 import sequelize from "../dbConnection";
 
 
-  export default class VisitPlan extends Model { }
+  export default class Message extends Model { }
 
-  VisitPlan.init({
+  Message.init({
     // Model attributes are defined here
     id:{
       type: DataTypes.UUID,
@@ -13,23 +13,31 @@ import sequelize from "../dbConnection";
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
-    employeeId: {
+    senderId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    receiverId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    resourceId: {
       type: DataTypes.UUID,
     },
-    weeklyVisitPlan: {
+    message: {
       type: DataTypes.TEXT,
     },
-    monthlyVisitPlan: {
-      type: DataTypes.TEXT,
+    viewed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     },
     extraData: {
       type: DataTypes.JSONB,
     }
-    
   }, {
     sequelize,
-    modelName: 'VisitPlan',
+    modelName: 'Message',
   });
 
-  VisitPlan.sync().then(()=>console.log("VisitPlan was successfully synced"));
+  Message.sync().then(()=>console.log("Message was successfully synced"));
 

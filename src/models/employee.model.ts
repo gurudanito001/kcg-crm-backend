@@ -1,8 +1,5 @@
 import { Sequelize, DataTypes, Model } from 'sequelize'
 import sequelize from "../dbConnection";
-import Interfaces from 'src/interfaces';
-import Customer from './customer.model';
-import CustomerVisit from './customerVisit.model';
 
  
 
@@ -19,41 +16,61 @@ import CustomerVisit from './customerVisit.model';
     },
     companyId: {
       type: DataTypes.UUID,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "companyId is required"},
+      }
     },
     companyName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "companyName is required"},
+      }
     },
     staffCadre: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "staffCadre is required"},
+      }
     },
     branchId: {
       type: DataTypes.UUID,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "branchId is required"},
+      }
     },
     firstName: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "firstName is required"},
+      }
     },
     middleName: {
       type: DataTypes.STRING,
     },
     lastName: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "lastName is required"},
+      }
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: { msg: "Email must be a valid email"}
+        isEmail: { msg: "email must be a valid email"},
       }
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-
     supervisor: {
       type: DataTypes.STRING,
     },
@@ -61,9 +78,6 @@ import CustomerVisit from './customerVisit.model';
       type: DataTypes.STRING,
     },
     locationManager: {
-      type: DataTypes.STRING,
-    },
-    subordinate: {
       type: DataTypes.STRING,
     },
     employmentDate: {
@@ -80,7 +94,6 @@ import CustomerVisit from './customerVisit.model';
     modelName: 'Employee',
   });
 
-  //Employee.belongsToMany(Customer, {through: CustomerVisit})
 
   Employee.sync().then(()=>console.log("Employee was successfully synced"));
 

@@ -52,6 +52,25 @@ class Controller {
             }
         });
     }
+    getAllByCustomerId(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let id = req.params.id;
+            try {
+                let allData = yield contactPerson_model_1.default.findAll({ where: { customerId: id } });
+                if (allData) {
+                    return res.status(200).json({
+                        message: "Contact Persons Fetched Successfully",
+                        status: "success",
+                        statusCode: 200,
+                        payload: allData
+                    });
+                }
+            }
+            catch (error) {
+                return res.status(400).json({ message: error.message });
+            }
+        });
+    }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;

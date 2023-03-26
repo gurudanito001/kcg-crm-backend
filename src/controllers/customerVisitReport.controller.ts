@@ -1,12 +1,14 @@
 import CustomerVisitReport from "../models/customerVisitReport.model";
 import Interfaces  from "../interfaces";
 import { Request, Response } from "express";
+import CustomerVisit from "../models/customerVisit.model";
 
 class Controller {
   public async create(req: Request, res: Response){
     let data = req.body;
     try {
-      let savedData = await CustomerVisitReport.create(data); 
+      let savedData: any = await CustomerVisitReport.create(data); 
+      await CustomerVisit.update({visitReportId: savedData.id}, {where: {id: savedData.customerVisitId}})
       if(savedData){
         return res.status(201).json({
           message: "Customer Visit Report Created Successfully",

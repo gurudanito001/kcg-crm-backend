@@ -23,9 +23,14 @@ InvoiceRequestForm.init({
     },
     address1: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false
     },
     address2: {
         type: sequelize_1.DataTypes.STRING,
+    },
+    contactPerson: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
     },
     contactOfficeTelephone: {
         type: sequelize_1.DataTypes.STRING,
@@ -45,7 +50,10 @@ InvoiceRequestForm.init({
     kycId: {
         type: sequelize_1.DataTypes.STRING,
     },
-    vehicleDetails: {
+    vehicleBrand: {
+        type: sequelize_1.DataTypes.STRING,
+    },
+    vehicleModel: {
         type: sequelize_1.DataTypes.STRING,
     },
     quantity: {
@@ -76,15 +84,18 @@ InvoiceRequestForm.init({
         type: sequelize_1.DataTypes.STRING,
     },
     vatDeduction: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.BOOLEAN,
     },
     whtDeduction: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.BOOLEAN,
     },
     paymentStatus: {
         type: sequelize_1.DataTypes.STRING,
     },
-    LPO: {
+    lpoNumber: {
+        type: sequelize_1.DataTypes.STRING,
+    },
+    lpoPdf: {
         type: sequelize_1.DataTypes.STRING,
     },
     warrantyCertificate: {

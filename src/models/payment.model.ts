@@ -24,6 +24,10 @@ import sequelize from "../dbConnection";
     },
     nameOfCustomer: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: { 
+        notEmpty: { msg: "nameOfCustomer is required" }
+      }
     },
     customerAddress: {
       type: DataTypes.STRING,

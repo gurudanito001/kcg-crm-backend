@@ -42,7 +42,7 @@ import sequelize from "../dbConnection";
     vehicleServiceDetails: {
       type: DataTypes.STRING,
     },
-    bodySpecialFitmentDetails: {
+    vehicleSpecialFitmentDetails: {
       type: DataTypes.STRING,
     },
     costOfBodySpecialFitment: {
@@ -58,10 +58,10 @@ import sequelize from "../dbConnection";
       type: DataTypes.STRING,
     },
     vatDeduction: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
     },
     whtDeduction: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
     },
     refundRebaseAmount: {
       type: DataTypes.STRING,
@@ -70,7 +70,7 @@ import sequelize from "../dbConnection";
       type: DataTypes.STRING,
     },
     registration: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
     },
     designation: {
       type: DataTypes.STRING,
@@ -101,5 +101,5 @@ import sequelize from "../dbConnection";
     modelName: 'PfiRequestForm',
   });
 
-  PfiRequestForm.sync().then(()=>console.log("PfiRequestForm was successfully synced"));
+  PfiRequestForm.sync({force: true}).then(()=>console.log("PfiRequestForm was successfully synced"));
 

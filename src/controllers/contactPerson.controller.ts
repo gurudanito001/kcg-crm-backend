@@ -37,6 +37,23 @@ class Controller {
     }
   }
 
+  public async getAllByCustomerId(req: Request, res: Response){
+    let id = req.params.id;
+    try {
+      let allData = await ContactPerson.findAll( {where: {customerId: id}}); 
+      if(allData){
+        return res.status(200).json({
+          message: "Contact Persons Fetched Successfully",
+          status: "success",
+          statusCode: 200,
+          payload: allData
+        })
+      }
+    } catch (error: any) {
+      return res.status(400).json({message: error.message})
+    }
+  }
+
   public async getOne(req: Request, res: Response){
     let id = req.params.id;
     try {

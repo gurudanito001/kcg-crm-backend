@@ -5,7 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const dbConnection_1 = __importDefault(require("../dbConnection"));
-const LGA = dbConnection_1.default.define('Lga', {
+class Notification extends sequelize_1.Model {
+}
+exports.default = Notification;
+Notification.init({
+    // Model attributes are defined here
     id: {
         type: sequelize_1.DataTypes.UUID,
         primaryKey: true,
@@ -13,28 +17,26 @@ const LGA = dbConnection_1.default.define('Lga', {
         allowNull: false,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
     },
-    name: {
+    message: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "name is required" }
-        }
+        allowNull: false
     },
-    state: {
+    url: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "state is required" }
-        }
     },
-    code: {
-        type: sequelize_1.DataTypes.STRING,
-        unique: true
+    resourceId: {
+        type: sequelize_1.DataTypes.UUID,
+    },
+    viewed: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false
     },
     extraData: {
-        type: sequelize_1.DataTypes.JSONB,
+        type: sequelize_1.DataTypes.JSON,
     }
+}, {
+    sequelize: dbConnection_1.default,
+    modelName: 'Notification',
 });
-LGA.sync().then(() => console.log("LGA was successfully synced"));
-exports.default = LGA;
-//# sourceMappingURL=lga.model.js.map
+Notification.sync().then(() => console.log("Notification was successfully synced"));
+//# sourceMappingURL=notification.model.js.map

@@ -25,7 +25,7 @@ import sequelize from "../dbConnection";
     deliveryNoteNumber: {
       type: DataTypes.STRING,
     },
-    chasisNumber: {
+    chasisNumbers: {
       type: DataTypes.STRING,
     },
     bodyBuilding: {

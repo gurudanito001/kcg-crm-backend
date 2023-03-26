@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize'
 import sequelize from "../dbConnection";
-import Company from './company.model';
 
 
 
@@ -16,31 +15,55 @@ const Branch = sequelize.define('Branch', {
   companyId: {
     type: DataTypes.UUID,
     allowNull: false,
+    validate: {
+      notEmpty:{ msg: "companyId is required"},
+    }
   },
-  stateId: {
-    type: DataTypes.UUID,
+  state: {
+    type: DataTypes.STRING,
     allowNull: false,
+    validate: {
+      notEmpty:{ msg: "state is required"},
+    }
   },
-  lgaId: {
-    type: DataTypes.UUID,
+  lga: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty:{ msg: "lga is required"},
+    }
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty:{ msg: "name is required"},
+    }
   },
   code: {
     type: DataTypes.STRING,
-    unique: true
+    unique: true,
+    validate: {
+      notEmpty:{ msg: "code is required"},
+    }
+  },
+  isHeadOffice: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
   },
   address: {
     type: DataTypes.STRING,
     allowNull: false,
+    validate: {
+      notEmpty:{ msg: "address is required"},
+    }
   },
   extraData: {
     type: DataTypes.JSONB,
   }
 });
-Branch.sync({force: true}).then(() => console.log("Branch was successfully synced"));
+Branch.sync().then(() => console.log("Branch was successfully synced"));
 
 export default Branch;
 

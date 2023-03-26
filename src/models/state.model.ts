@@ -27,7 +27,7 @@ const State = sequelize.define('State', {
     type: DataTypes.JSONB,
   }
 });
-State.sync({force: true}).then(() => console.log("State was successfully synced"));
+State.sync().then(() => console.log("State was successfully synced"));
 
 export default State;
 

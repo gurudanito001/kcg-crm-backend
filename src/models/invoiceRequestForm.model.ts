@@ -19,9 +19,14 @@ import sequelize from "../dbConnection";
     },
     address1: {
       type: DataTypes.STRING,
+      allowNull: false
     },
     address2: {
       type: DataTypes.STRING,
+    },
+    contactPerson: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     contactOfficeTelephone: {
       type: DataTypes.STRING,
@@ -41,7 +46,10 @@ import sequelize from "../dbConnection";
     kycId: {
       type: DataTypes.STRING,
     },
-    vehicleDetails: {
+    vehicleBrand: {
+      type: DataTypes.STRING,
+    },
+    vehicleModel: {
       type: DataTypes.STRING,
     },
     quantity: {
@@ -68,20 +76,22 @@ import sequelize from "../dbConnection";
     registration: {
       type: DataTypes.STRING,
     },
-
     delivery: {
       type: DataTypes.STRING,
     },
     vatDeduction: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
     },
     whtDeduction: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
     },
     paymentStatus: {
       type: DataTypes.STRING,
     },
-    LPO: {
+    lpoNumber: {
+      type: DataTypes.STRING,
+    },
+    lpoPdf: {
       type: DataTypes.STRING,
     },
     warrantyCertificate: {
@@ -117,7 +127,6 @@ import sequelize from "../dbConnection";
     extraData: {
       type: DataTypes.JSONB,
     }
-    
   }, {
     sequelize,
     modelName: 'InvoiceRequestForm',

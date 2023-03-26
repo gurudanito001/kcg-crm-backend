@@ -13,19 +13,33 @@ import sequelize from "../dbConnection";
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
-    /* employeeId: {
+    employeeId: {
       type: DataTypes.UUID,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "employeeId is required"},
+      }
     },
     customerId: {
       type: DataTypes.UUID,
-      allowNull: false
-    }, */
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "customerId is required"},
+      }
+    },
     firstName: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "firstName is required"},
+      }
     },
     lastName: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "lastName is required"},
+      }
     },
     email: {
       type: DataTypes.STRING,
@@ -41,6 +55,10 @@ import sequelize from "../dbConnection";
     },
     phoneNumber1: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "phoneNumber1 is required"},
+      }
     },
     phoneNumber2: {
       type: DataTypes.STRING,

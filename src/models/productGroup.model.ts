@@ -15,7 +15,11 @@ import sequelize from "../dbConnection";
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      unique: true,
+      allowNull: false,
+      validate: { 
+        notEmpty: { msg: "name is required" }
+      }
     },
     code: {
       type: DataTypes.STRING,

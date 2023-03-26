@@ -12,23 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const company_model_1 = __importDefault(require("../models/company.model"));
-const branch_model_1 = __importDefault(require("../models/branch.model"));
-const imageService_1 = require("../services/imageService");
+const invoiceRequestForm_model_1 = __importDefault(require("../models/invoiceRequestForm.model"));
 class Controller {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let data = req.body;
             try {
-                let result = yield (0, imageService_1.uploadImage)({ data: data.logo });
-                if (!result) {
-                    return res.status(400).json({ message: "Could not Save Logo" });
-                }
-                let { name, group, email, code, address, brands, extraData } = data;
-                let savedData = yield company_model_1.default.create({ name, group, email, code, address, brands, logo: result.secure_url, extraData });
+                let savedData = yield invoiceRequestForm_model_1.default.create(data);
                 if (savedData) {
                     return res.status(201).json({
-                        message: "Company Created Successfully",
+                        message: "Invoice Request Form Created Successfully",
                         status: "success",
                         statusCode: 201,
                         payload: savedData
@@ -44,10 +37,10 @@ class Controller {
         return __awaiter(this, void 0, void 0, function* () {
             let data = req.body;
             try {
-                let allData = yield company_model_1.default.findAll();
+                let allData = yield invoiceRequestForm_model_1.default.findAll();
                 if (allData) {
                     return res.status(200).json({
-                        message: "Companies Fetched Successfully",
+                        message: "Invoice Request Form Fetched Successfully",
                         status: "success",
                         statusCode: 200,
                         payload: allData
@@ -63,14 +56,10 @@ class Controller {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
             try {
-                let oneData = yield company_model_1.default.findByPk(id);
-                let branches = yield branch_model_1.default.findAll({
-                    where: { companyId: id }
-                });
-                oneData.branches = branches;
+                let oneData = yield invoiceRequestForm_model_1.default.findByPk(id);
                 if (oneData) {
                     return res.status(200).json({
-                        message: "Company Fetched Successfully",
+                        message: "Invoice Request Form Fetched Successfully",
                         status: "success",
                         statusCode: 200,
                         payload: oneData
@@ -87,19 +76,12 @@ class Controller {
             let id = req.params.id;
             let data = req.body;
             try {
-                if (data.logo.startsWith("data:image")) {
-                    let result = yield (0, imageService_1.uploadImage)({ data: data.logo });
-                    if (!result) {
-                        return res.status(400).json({ message: "Could not Save Logo" });
-                    }
-                    data.logo = result.secure_url;
-                }
-                let updatedData = yield company_model_1.default.update(data, {
+                let updatedData = yield invoiceRequestForm_model_1.default.update(data, {
                     where: { id: id }
                 });
                 if (updatedData) {
                     return res.status(200).json({
-                        message: "Company updated successfully",
+                        message: "Invoice Request Form updated successfully",
                         status: "success",
                         statusCode: 200,
                         payload: updatedData
@@ -115,12 +97,12 @@ class Controller {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
             try {
-                let deletedData = yield company_model_1.default.destroy({
+                let deletedData = yield invoiceRequestForm_model_1.default.destroy({
                     where: { id: id }
                 });
                 if (deletedData) {
                     return res.status(200).json({
-                        message: "Company deleted successfully",
+                        message: "Invoice Request Form deleted successfully",
                         status: "success",
                         statusCode: 200,
                         payload: deletedData
@@ -133,6 +115,6 @@ class Controller {
         });
     }
 }
-const CompanyController = new Controller();
-exports.default = CompanyController;
-//# sourceMappingURL=company.controller.js.map
+const InvoiceRequestFormController = new Controller();
+exports.default = InvoiceRequestFormController;
+//# sourceMappingURL=invoiceRequestForm.controller.js.map

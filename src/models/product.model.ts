@@ -15,15 +15,21 @@ import sequelize from "../dbConnection";
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: { 
+        notEmpty: { msg: "name is required" }
+      }
     },
     code: {
       type: DataTypes.STRING,
-      unique: true
+      unique: true,
     },
     productGroupId: {
       type: DataTypes.UUID,
-      allowNull: false
+      allowNull: false,
+      validate: { 
+        notEmpty: { msg: "productGroupId is required" }
+      }
     },
     description: {
       type: DataTypes.STRING,
@@ -42,11 +48,16 @@ import sequelize from "../dbConnection";
     },
     price: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: { 
+        notEmpty: { msg: "price is required"}
+      }
     },
     vatInclusive: {
       type: DataTypes.BOOLEAN,
-    },
-    vatRate: {
+      defaultValue: false
+    }, 
+    vatRate: { 
       type: DataTypes.STRING,
     },
     extraData: {
@@ -57,5 +68,5 @@ import sequelize from "../dbConnection";
     modelName: 'Product',
   });
 
-  Product.sync({force: true}).then(()=>console.log("Product was successfully synced"));
+  Product.sync().then(()=>console.log("Product was successfully synced"));
 

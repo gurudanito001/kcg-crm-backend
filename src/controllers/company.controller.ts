@@ -12,8 +12,8 @@ class Controller {
       if(!result){
         return res.status(400).json({message: "Could not Save Logo"})
       }
-      let {name, group, email, code, address} = data
-      let savedData = await Company.create({name, group, email, code, address, logo: result.secure_url});
+      let {name, group, email, code, address, brands, extraData} = data
+      let savedData = await Company.create({name, group, email, code, address, brands, logo: result.secure_url, extraData});
       if(savedData){
         return res.status(201).json({
           message: "Company Created Successfully",
@@ -47,7 +47,11 @@ class Controller {
   public async getOne(req: Request, res: Response){
     let id = req.params.id;
     try {
-      let oneData = await Company.findByPk(id); 
+      let oneData: any = await Company.findByPk(id); 
+      let branches = await Branch.findAll({
+        where: {companyId: id}
+      })
+      oneData.branches = branches;
       if(oneData){
         return res.status(200).json({
           message: "Company Fetched Successfully",
@@ -65,6 +69,14 @@ class Controller {
     let id = req.params.id
     let data = req.body;
     try {
+      if(data.logo.startsWith("data:image")){
+        let result = await uploadImage({ data: data.logo });
+        if(!result){
+          return res.status(400).json({message: "Could not Save Logo"})
+        }
+        data.logo = result.secure_url
+      }
+      
       let updatedData = await Company.update(data, {
         where: {id: id}
       }); 

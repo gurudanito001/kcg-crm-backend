@@ -1,15 +1,26 @@
-import Branch from "../models/branch.model";
+import MarkettingActivity from "../models/markettingActivity.model";
 import Interfaces  from "../interfaces";
 import { Request, Response } from "express";
+import { uploadImage } from "../services/imageService";
 
 class Controller {
   public async create(req: Request, res: Response){
     let data = req.body;
     try {
-      let savedData = await Branch.create(data); 
+
+      if(data.pictures.length > 0){
+        let imagesUrls = await Promise.all(
+          data.pictures.map(async (base64Img: any) => {
+            let picture = await uploadImage({data: base64Img});
+            return picture.secure_url;
+          })
+        )
+        data.pictures = imagesUrls;
+      }
+      let savedData = await MarkettingActivity.create(data); 
       if(savedData){
         return res.status(201).json({
-          message: "Branch Created Successfully",
+          message: "Marketting Activity Created Successfully",
           status: "success",
           statusCode: 201,
           payload: savedData
@@ -23,10 +34,10 @@ class Controller {
   public async getAll(req: Request, res: Response){
     let data = req.body;
     try {
-      let allData = await Branch.findAll(); 
+      let allData = await MarkettingActivity.findAll(); 
       if(allData){
         return res.status(200).json({
-          message: "Branches Fetched Successfully",
+          message: "Marketting Activity Fetched Successfully",
           status: "success",
           statusCode: 200,
           payload: allData
@@ -40,29 +51,10 @@ class Controller {
   public async getOne(req: Request, res: Response){
     let id = req.params.id;
     try {
-      let oneData = await Branch.findByPk(id); 
+      let oneData = await MarkettingActivity.findByPk(id); 
       if(oneData){
         return res.status(200).json({
-          message: "Branch Fetched Successfully",
-          status: "success",
-          statusCode: 200,
-          payload: oneData
-        })
-      }
-    } catch (error: any) {
-      return res.status(400).json({message: error.message})
-    }
-  }
-
-  public async getOneByCompanyId(req: Request, res: Response){
-    let id = req.params.id;
-    try {
-      let oneData = await Branch.findAll({ where: {
-        companyId: id
-      }}); 
-      if(oneData){
-        return res.status(200).json({
-          message: "Branches Fetched Successfully",
+          message: "Marketting Activity Fetched Successfully",
           status: "success",
           statusCode: 200,
           payload: oneData
@@ -74,15 +66,27 @@ class Controller {
   }
 
   public async updateOne(req: Request, res: Response){
-    let id = req.params.id
+    let id = req.params.id;
     let data = req.body;
     try {
-      let updatedData = await Branch.update(data, {
+      let imagesFromDB = data.pictures.filter( (item: string) => item.startsWith("https://"));
+      let imagesFromLocal = data.pictures.filter( (item: string) => item.startsWith("data:image"));
+
+      if(imagesFromLocal.length > 0){
+        let imagesUrls = await Promise.all(
+          imagesFromLocal.map(async (base64Img: any) => {
+            let picture = await uploadImage({data: base64Img});
+            return picture.secure_url;
+          })
+        )
+        data.pictures = [...imagesFromDB, ...imagesUrls];
+      }
+      let updatedData = await MarkettingActivity.update(data, {
         where: {id: id}
       }); 
       if(updatedData){
         return res.status(200).json({
-          message: "Branch updated successfully",
+          message: "Marketting Activity updated successfully",
           status: "success",
           statusCode: 200,
           payload: updatedData
@@ -96,12 +100,12 @@ class Controller {
   public async deleteOne(req: Request, res: Response){
     let id = req.params.id
     try {
-      let deletedData = await Branch.destroy({
+      let deletedData = await MarkettingActivity.destroy({
         where: {id: id}
       }); 
       if(deletedData){
         return res.status(200).json({
-          message: "Branch deleted successfully",
+          message: "Marketting Activity deleted successfully",
           status: "success",
           statusCode: 200,
           payload: deletedData
@@ -114,5 +118,5 @@ class Controller {
   
 }
 
-const BranchController = new Controller()
-export default BranchController
+const MarkettingActivityController = new Controller()
+export default MarkettingActivityController

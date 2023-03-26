@@ -13,37 +13,59 @@ import sequelize from "../dbConnection";
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
-    /* customerVisit: {
-      type: DataTypes.JSON,
-      allowNull: false
-    }, */
+    customerVisitId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "customerVisitId is required"},
+      }
+    },
     callType: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "callType is required"},
+      }
     },
     status: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "status is required"},
+      }
     },
     productsDiscussed: {
-      type: DataTypes.ARRAY(DataTypes.JSON),
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "productsDiscussed is required"},
+      }
     },
     price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     quantity: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     durationOfMeeting: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "durationOfMeeting is required"},
+      }
     },
     meetingOutcome: {
       type: DataTypes.STRING,
     },
-    nextVisit: {
-      type: DataTypes.JSON,
+    nextVisitDate: {
+      type: DataTypes.STRING,
+    },
+    nextVisitTime: {
+      type: DataTypes.STRING,
     },
     pfiRequest: {
-      type: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     extraData: {
       type: DataTypes.JSONB,
@@ -53,5 +75,5 @@ import sequelize from "../dbConnection";
     modelName: 'CustomerVisitReport',
   });
 
-  CustomerVisitReport.sync().then(()=>console.log("CustomerVisitReport was successfully synced"));
+  CustomerVisitReport.sync({force: true}).then(()=>console.log("CustomerVisitReport was successfully synced"));
 

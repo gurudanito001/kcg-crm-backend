@@ -65,6 +65,23 @@ class Controller {
     }
   }
 
+  public async getByProductGroupId(req: Request, res: Response){
+    let id = req.params.id;
+    try {
+      let oneData = await Product.findAll({ where: {productGroupId: id}}); 
+      if(oneData){
+        return res.status(200).json({
+          message: "Products Fetched Successfully",
+          status: "success",
+          statusCode: 200,
+          payload: oneData
+        })
+      }
+    } catch (error: any) {
+      return res.status(400).json({message: error.message})
+    }
+  }
+
   public async updateOne(req: Request, res: Response){
     let id = req.params.id;
     let data = req.body;

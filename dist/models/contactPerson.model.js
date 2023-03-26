@@ -17,19 +17,33 @@ ContactPerson.init({
         allowNull: false,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
     },
-    /* employeeId: {
-      type: DataTypes.UUID,
-      allowNull: false
+    employeeId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "employeeId is required" },
+        }
     },
     customerId: {
-      type: DataTypes.UUID,
-      allowNull: false
-    }, */
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "customerId is required" },
+        }
+    },
     firstName: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "firstName is required" },
+        }
     },
     lastName: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "lastName is required" },
+        }
     },
     email: {
         type: sequelize_1.DataTypes.STRING,
@@ -45,6 +59,10 @@ ContactPerson.init({
     },
     phoneNumber1: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "phoneNumber1 is required" },
+        }
     },
     phoneNumber2: {
         type: sequelize_1.DataTypes.STRING,

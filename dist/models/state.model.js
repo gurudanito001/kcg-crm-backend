@@ -29,6 +29,6 @@ const State = dbConnection_1.default.define('State', {
         type: sequelize_1.DataTypes.JSONB,
     }
 });
-State.sync({ force: true }).then(() => console.log("State was successfully synced"));
+State.sync().then(() => console.log("State was successfully synced"));
 exports.default = State;
 //# sourceMappingURL=state.model.js.map

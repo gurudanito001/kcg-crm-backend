@@ -12,7 +12,8 @@ import CustomerController from './controllers/customer.controller';
 import CustomerVisitController from './controllers/customerVisit.controller';
 import CustomerVisitReportController from './controllers/customerVisitReport.controller';
 import EmployeeController from './controllers/employee.controller';
-import InvoiceRequestFormController from './controllers/invoiceRequestForm.model';
+import InvoiceRequestFormController from './controllers/invoiceRequestForm.controller';
+import MarkettingActivityController from './controllers/markettingActivity.controller';
 import PaymentController from './controllers/payment.controller';
 import PfiRequestFormController from './controllers/pfiRequestForm.controller';
 import ProductController from './controllers/product.controller';
@@ -28,12 +29,16 @@ import Employee from './models/employee.model';
 
 const app: Express = express();
 
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '50mb'})); // define the size limit
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));	// define the size limit
+app.use(express.json());
+
+/* app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
     extended: true,
   })
-)
+) */
 app.use(cors());
 
 // AUTH
@@ -52,6 +57,7 @@ app.delete('/company/:id', CompanyController.deleteOne);
 app.post('/branch/create', BranchController.create);
 app.get('/branch', BranchController.getAll);
 app.get('/branch/:id', BranchController.getOne);
+app.get('/branch/company/:id', BranchController.getOneByCompanyId);
 app.put('/branch/:id', BranchController.updateOne);
 app.delete('/branch/:id', BranchController.deleteOne);
 
@@ -72,6 +78,7 @@ app.delete('/lga/:id', LgaController.deleteOne);
 //Contact Person
 app.post('/contactPerson/create', ContactPersonController.create);
 app.get('/contactPerson', ContactPersonController.getAll);
+app.get('/contactPerson/customer/:id', ContactPersonController.getAllByCustomerId);
 app.get('/contactPerson/:id', ContactPersonController.getOne);
 app.put('/contactPerson/:id', ContactPersonController.updateOne);
 app.delete('/contactPerson/:id', ContactPersonController.deleteOne);
@@ -111,6 +118,13 @@ app.get('/invoiceRequestForm/:id', InvoiceRequestFormController.getOne);
 app.put('/invoiceRequestForm/:id', InvoiceRequestFormController.updateOne);
 app.delete('/invoiceRequestForm/:id', InvoiceRequestFormController.deleteOne);
 
+//Invoice Request Form
+app.post('/markettingActivity/create', MarkettingActivityController.create);
+app.get('/markettingActivity', MarkettingActivityController.getAll);
+app.get('/markettingActivity/:id', MarkettingActivityController.getOne);
+app.put('/markettingActivity/:id', MarkettingActivityController.updateOne);
+app.delete('/markettingActivity/:id', MarkettingActivityController.deleteOne);
+
 //Payment
 app.post('/payment/create', PaymentController.create);
 app.get('/payment', PaymentController.getAll);
@@ -128,6 +142,7 @@ app.delete('/pfiRequestForm/:id', PfiRequestFormController.deleteOne);
 //Product
 app.post('/product/create', ProductController.create);
 app.get('/product', ProductController.getAll);
+app.get('/product/productGroup/:id', ProductController.getByProductGroupId);
 app.get('/product/:id', ProductController.getOne);
 app.put('/product/:id', ProductController.updateOne);
 app.delete('/product/:id', ProductController.deleteOne);

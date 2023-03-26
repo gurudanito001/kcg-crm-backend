@@ -28,6 +28,10 @@ Payment.init({
     },
     nameOfCustomer: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "nameOfCustomer is required" }
+        }
     },
     customerAddress: {
         type: sequelize_1.DataTypes.STRING,

@@ -24,6 +24,7 @@ StaffCadre.init({
     },
     code: {
         type: sequelize_1.DataTypes.INTEGER,
+        unique: true
     },
     description: {
         type: sequelize_1.DataTypes.STRING,

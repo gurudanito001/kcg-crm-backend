@@ -19,34 +19,55 @@ Employee.init({
     },
     companyId: {
         type: sequelize_1.DataTypes.UUID,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "companyId is required" },
+        }
     },
     companyName: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "companyName is required" },
+        }
     },
     staffCadre: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "staffCadre is required" },
+        }
     },
     branchId: {
         type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "branchId is required" },
+        }
     },
     firstName: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "firstName is required" },
+        }
     },
     middleName: {
         type: sequelize_1.DataTypes.STRING,
     },
     lastName: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "lastName is required" },
+        }
     },
     email: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
-            isEmail: { msg: "Email must be a valid email" }
+            isEmail: { msg: "email must be a valid email" },
         }
     },
     password: {
@@ -62,9 +83,6 @@ Employee.init({
     locationManager: {
         type: sequelize_1.DataTypes.STRING,
     },
-    subordinate: {
-        type: sequelize_1.DataTypes.STRING,
-    },
     employmentDate: {
         type: sequelize_1.DataTypes.STRING,
     },
@@ -78,6 +96,5 @@ Employee.init({
     sequelize: dbConnection_1.default,
     modelName: 'Employee',
 });
-//Employee.belongsToMany(Customer, {through: CustomerVisit})
 Employee.sync().then(() => console.log("Employee was successfully synced"));
 //# sourceMappingURL=employee.model.js.map

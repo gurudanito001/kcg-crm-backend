@@ -19,15 +19,21 @@ Product.init({
     },
     name: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "name is required" }
+        }
     },
     code: {
         type: sequelize_1.DataTypes.STRING,
-        unique: true
+        unique: true,
     },
     productGroupId: {
         type: sequelize_1.DataTypes.UUID,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "productGroupId is required" }
+        }
     },
     description: {
         type: sequelize_1.DataTypes.STRING,
@@ -46,9 +52,14 @@ Product.init({
     },
     price: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "price is required" }
+        }
     },
     vatInclusive: {
         type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false
     },
     vatRate: {
         type: sequelize_1.DataTypes.STRING,
@@ -60,5 +71,5 @@ Product.init({
     sequelize: dbConnection_1.default,
     modelName: 'Product',
 });
-Product.sync({ force: true }).then(() => console.log("Product was successfully synced"));
+Product.sync().then(() => console.log("Product was successfully synced"));
 //# sourceMappingURL=product.model.js.map

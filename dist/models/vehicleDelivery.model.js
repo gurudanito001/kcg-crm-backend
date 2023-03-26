@@ -29,7 +29,7 @@ VehicleDelivery.init({
     deliveryNoteNumber: {
         type: sequelize_1.DataTypes.STRING,
     },
-    chasisNumber: {
+    chasisNumbers: {
         type: sequelize_1.DataTypes.STRING,
     },
     bodyBuilding: {

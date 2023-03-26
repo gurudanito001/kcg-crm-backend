@@ -1,7 +1,5 @@
 import { Sequelize, DataTypes, Model } from 'sequelize'
 import sequelize from "../dbConnection";
-import ContactPerson from './contactPerson.model';
-import CustomerVisit from './customerVisit.model';
 
 
   export default class Customer extends Model { }
@@ -15,12 +13,26 @@ import CustomerVisit from './customerVisit.model';
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
+    employeeId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "employeeId is required"},
+      }
+    },
     companyName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "companyName is required"},
+      }
     },
     state: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "state is required"},
+      }
     },
     lga: {
       type: DataTypes.STRING,
@@ -45,18 +57,31 @@ import CustomerVisit from './customerVisit.model';
     },
     industry: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "industry is required"},
+      }
     },
     businessType: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "businessType is required"},
+      }
     },
     customerType: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "customerType is required"},
+      }
     },
     enquirySource: {
       type: DataTypes.STRING,
-    },
-    contactPersons: {
-      type: DataTypes.ARRAY(DataTypes.JSON)
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "enquirySource is required"},
+      }
     },
     extraData: {
       type: DataTypes.JSONB,
@@ -65,9 +90,6 @@ import CustomerVisit from './customerVisit.model';
     sequelize,
     modelName: 'Customer',
   });
-
-  Customer.hasMany(ContactPerson);
-
 
   Customer.sync().then(()=>console.log("Customer was successfully synced"));
 

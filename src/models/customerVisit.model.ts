@@ -1,8 +1,5 @@
 import { Sequelize, DataTypes, Model } from 'sequelize'
 import sequelize from "../dbConnection";
-import Customer from './customer.model';
-import CustomerVisitReport from './customerVisitReport.model';
-import Employee from './employee.model';
 
 
   export default class CustomerVisit extends Model { }
@@ -16,25 +13,64 @@ import Employee from './employee.model';
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
-    EmployeeId: {
+    employeeId: {
       type: DataTypes.UUID,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "employeeId is required"},
+      }
     },
-    CustomerId: {
+    customerId: {
       type: DataTypes.UUID,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "customerId is required"},
+      }
     },
-    personToVisit: {
-      type: DataTypes.JSON,
+    companyName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "companyName is required"},
+      }
+    },
+    personToVisitId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "personToVisitId is required"},
+      }
+    },
+    personToVisitName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "personToVisitName is required"},
+      }
     },
     meetingDate: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "meetingDate is required"},
+      }
+    },
+    meetingTime: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "meetingTime is required"},
+      }
     },
     meetingVenue: {
       type: DataTypes.STRING,
     },
     meetingPurpose: {
       type: DataTypes.STRING,
+    },
+    visitReportId: {
+      type: DataTypes.UUID,
+      defaultValue: null
     },
     extraData: {
       type: DataTypes.JSONB,
@@ -43,8 +79,6 @@ import Employee from './employee.model';
     sequelize,
     modelName: 'CustomerVisit',
   });
-
-  CustomerVisit.hasOne(CustomerVisitReport);
 
   CustomerVisit.sync().then(()=>console.log("CustomerVisit was successfully synced"));
 

@@ -13,42 +13,56 @@ var Company = dbConnection_1.default.define('Company', {
         unique: true,
         allowNull: false,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
-        validate: {}
     },
     group: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "group is required" }
+        }
     },
     code: {
         type: sequelize_1.DataTypes.STRING,
-        unique: true
+        unique: true,
+        validate: {
+            notEmpty: { msg: "code is required" }
+        }
     },
     name: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true,
+        validate: {
+            notEmpty: { msg: "name is required" }
+        }
     },
     logo: {
         type: sequelize_1.DataTypes.STRING,
-    },
-    address: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "logo is required" }
+        }
     },
     email: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
-            isEmail: { msg: "Email must be a valid email" }
+            notEmpty: { msg: "email is required" },
+            isEmail: { msg: "email must be a valid email" }
+        }
+    },
+    brands: {
+        type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSON),
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "List of brands is required" },
         }
     },
     extraData: {
         type: sequelize_1.DataTypes.JSONB,
     }
 });
-// Company.hasMany(Branch);
-//Company.hasMany(ProductGroup);
-//Company.hasMany(Employee);
 Company.sync().then(() => console.log("Company was successfully synced"));
 exports.default = Company;
 //# sourceMappingURL=company.model.js.map

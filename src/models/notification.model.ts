@@ -2,9 +2,9 @@ import { Sequelize, DataTypes, Model } from 'sequelize'
 import sequelize from "../dbConnection";
 
 
-  export default class StaffCadre extends Model { }
+  export default class Notification extends Model { }
 
-  StaffCadre.init({
+  Notification.init({
     // Model attributes are defined here
     id:{
       type: DataTypes.UUID,
@@ -13,25 +13,27 @@ import sequelize from "../dbConnection";
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
-    name: {
+    message: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      allowNull: false
     },
-    code: {
-      type: DataTypes.INTEGER,
-      unique: true
-    },
-    description: {
+    url: {
       type: DataTypes.STRING,
+    },
+    resourceId: {
+      type: DataTypes.UUID,
+    },
+    viewed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     },
     extraData: {
-      type: DataTypes.JSONB,
+      type: DataTypes.JSON,
     }
   }, {
     sequelize,
-    modelName: 'StaffCadre',
+    modelName: 'Notification',
   });
 
-  StaffCadre.sync().then(()=>console.log("StaffCadre was successfully synced"));
+  Notification.sync().then(()=>console.log("Notification was successfully synced"));
 

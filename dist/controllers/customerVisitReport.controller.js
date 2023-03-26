@@ -13,12 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const customerVisitReport_model_1 = __importDefault(require("../models/customerVisitReport.model"));
+const customerVisit_model_1 = __importDefault(require("../models/customerVisit.model"));
 class Controller {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let data = req.body;
             try {
                 let savedData = yield customerVisitReport_model_1.default.create(data);
+                yield customerVisit_model_1.default.update({ visitReportId: savedData.id }, { where: { id: savedData.customerVisitId } });
                 if (savedData) {
                     return res.status(201).json({
                         message: "Customer Visit Report Created Successfully",

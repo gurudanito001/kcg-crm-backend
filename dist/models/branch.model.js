@@ -16,30 +16,54 @@ const Branch = dbConnection_1.default.define('Branch', {
     companyId: {
         type: sequelize_1.DataTypes.UUID,
         allowNull: false,
+        validate: {
+            notEmpty: { msg: "companyId is required" },
+        }
     },
-    stateId: {
-        type: sequelize_1.DataTypes.UUID,
+    state: {
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
+        validate: {
+            notEmpty: { msg: "state is required" },
+        }
     },
-    lgaId: {
-        type: sequelize_1.DataTypes.UUID,
+    lga: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "lga is required" },
+        }
     },
     name: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "name is required" },
+        }
     },
     code: {
         type: sequelize_1.DataTypes.STRING,
-        unique: true
+        unique: true,
+        validate: {
+            notEmpty: { msg: "code is required" },
+        }
+    },
+    isHeadOffice: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     },
     address: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
+        validate: {
+            notEmpty: { msg: "address is required" },
+        }
     },
     extraData: {
         type: sequelize_1.DataTypes.JSONB,
     }
 });
-Branch.sync({ force: true }).then(() => console.log("Branch was successfully synced"));
+Branch.sync().then(() => console.log("Branch was successfully synced"));
 exports.default = Branch;
 //# sourceMappingURL=branch.model.js.map

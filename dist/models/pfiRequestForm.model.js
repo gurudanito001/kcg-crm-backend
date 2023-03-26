@@ -46,7 +46,7 @@ PfiRequestForm.init({
     vehicleServiceDetails: {
         type: sequelize_1.DataTypes.STRING,
     },
-    bodySpecialFitmentDetails: {
+    vehicleSpecialFitmentDetails: {
         type: sequelize_1.DataTypes.STRING,
     },
     costOfBodySpecialFitment: {
@@ -62,10 +62,10 @@ PfiRequestForm.init({
         type: sequelize_1.DataTypes.STRING,
     },
     vatDeduction: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.BOOLEAN,
     },
     whtDeduction: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.BOOLEAN,
     },
     refundRebaseAmount: {
         type: sequelize_1.DataTypes.STRING,
@@ -74,7 +74,7 @@ PfiRequestForm.init({
         type: sequelize_1.DataTypes.STRING,
     },
     registration: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.BOOLEAN,
     },
     designation: {
         type: sequelize_1.DataTypes.STRING,
@@ -104,5 +104,5 @@ PfiRequestForm.init({
     sequelize: dbConnection_1.default,
     modelName: 'PfiRequestForm',
 });
-PfiRequestForm.sync().then(() => console.log("PfiRequestForm was successfully synced"));
+PfiRequestForm.sync({ force: true }).then(() => console.log("PfiRequestForm was successfully synced"));
 //# sourceMappingURL=pfiRequestForm.model.js.map

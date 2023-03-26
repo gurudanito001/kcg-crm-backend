@@ -13,11 +13,17 @@ const LGA = sequelize.define('Lga', {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: { 
+      notEmpty: { msg: "name is required" }
+    }
   },
   state: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: { 
+      notEmpty: { msg: "state is required" }
+    }
   },
   code: {
     type: DataTypes.STRING,
@@ -27,7 +33,7 @@ const LGA = sequelize.define('Lga', {
     type: DataTypes.JSONB,
   }
 });
-LGA.sync({force: true}).then(() => console.log("LGA was successfully synced"));
+LGA.sync().then(() => console.log("LGA was successfully synced"));
 
 export default LGA;
 

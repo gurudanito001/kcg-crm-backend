@@ -17,14 +17,14 @@ VisitPlan.init({
         allowNull: false,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
     },
-    employee: {
-        type: sequelize_1.DataTypes.JSON,
+    employeeId: {
+        type: sequelize_1.DataTypes.UUID,
     },
     weeklyVisitPlan: {
-        type: sequelize_1.DataTypes.JSON,
+        type: sequelize_1.DataTypes.TEXT,
     },
     monthlyVisitPlan: {
-        type: sequelize_1.DataTypes.JSON,
+        type: sequelize_1.DataTypes.TEXT,
     },
     extraData: {
         type: sequelize_1.DataTypes.JSONB,

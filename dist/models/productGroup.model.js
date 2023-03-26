@@ -19,7 +19,11 @@ ProductGroup.init({
     },
     name: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        unique: true,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "name is required" }
+        }
     },
     code: {
         type: sequelize_1.DataTypes.STRING,

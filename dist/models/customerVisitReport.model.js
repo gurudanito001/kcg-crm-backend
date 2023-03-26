@@ -17,37 +17,59 @@ CustomerVisitReport.init({
         allowNull: false,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
     },
-    /* customerVisit: {
-      type: DataTypes.JSON,
-      allowNull: false
-    }, */
+    customerVisitId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "customerVisitId is required" },
+        }
+    },
     callType: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "callType is required" },
+        }
     },
     status: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "status is required" },
+        }
     },
     productsDiscussed: {
-        type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSON),
+        type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "productsDiscussed is required" },
+        }
     },
     price: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.STRING,
     },
     quantity: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.STRING,
     },
     durationOfMeeting: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "durationOfMeeting is required" },
+        }
     },
     meetingOutcome: {
         type: sequelize_1.DataTypes.STRING,
     },
-    nextVisit: {
-        type: sequelize_1.DataTypes.JSON,
+    nextVisitDate: {
+        type: sequelize_1.DataTypes.STRING,
+    },
+    nextVisitTime: {
+        type: sequelize_1.DataTypes.STRING,
     },
     pfiRequest: {
-        type: sequelize_1.DataTypes.BOOLEAN
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false,
     },
     extraData: {
         type: sequelize_1.DataTypes.JSONB,
@@ -56,5 +78,5 @@ CustomerVisitReport.init({
     sequelize: dbConnection_1.default,
     modelName: 'CustomerVisitReport',
 });
-CustomerVisitReport.sync().then(() => console.log("CustomerVisitReport was successfully synced"));
+CustomerVisitReport.sync({ force: true }).then(() => console.log("CustomerVisitReport was successfully synced"));
 //# sourceMappingURL=customerVisitReport.model.js.map

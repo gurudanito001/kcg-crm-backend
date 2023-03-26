@@ -79,6 +79,25 @@ class Controller {
             }
         });
     }
+    getByProductGroupId(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let id = req.params.id;
+            try {
+                let oneData = yield product_model_1.default.findAll({ where: { productGroupId: id } });
+                if (oneData) {
+                    return res.status(200).json({
+                        message: "Products Fetched Successfully",
+                        status: "success",
+                        statusCode: 200,
+                        payload: oneData
+                    });
+                }
+            }
+            catch (error) {
+                return res.status(400).json({ message: error.message });
+            }
+        });
+    }
     updateOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
