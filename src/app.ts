@@ -41,6 +41,11 @@ app.use(
 ) */
 app.use(cors());
 
+//Testing
+app.get('/test', (req, res) =>{
+  res.send("KCG-CRM API is live!!!!!")
+})
+
 // AUTH
 app.post('/auth/login', AuthController.login);
 app.post('/auth/forgotPassword', AuthController.forgotPassword);

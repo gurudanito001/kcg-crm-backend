@@ -1,8 +1,8 @@
 import State from "../models/state.model";
 import Interfaces  from "../interfaces";
 import { Request, Response } from "express";
-import sequelize from "src/dbConnection";
-import Company from "src/models/company.model";
+import sequelize from "../dbConnection";
+import Company from "../models/company.model";
 
 class Controller {
   public async create(req: Request, res: Response){

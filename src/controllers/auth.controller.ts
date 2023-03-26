@@ -3,7 +3,7 @@ import Employee from "../models/employee.model";
 import { Request, Response } from "express";
 import bcrypt from 'bcrypt';
 import sendEmail from "../services/sendEmail";
-import Interfaces from "src/interfaces";
+import Interfaces from "../interfaces";
 import { hashPassword, isPasswordMatch } from "../services/authServices";
 import { generateToken, decodeToken } from "../services/tokenService";
 import { tokenTypes } from "../config/token";
