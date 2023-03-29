@@ -60,7 +60,7 @@ class Controller {
             let id = req.params.id;
             try {
                 let oneData = yield employee_model_1.default.findByPk(id);
-                let { supervisor, productHead, locationManager, subordinate } = oneData;
+                let { supervisor, productHead, locationManager } = oneData;
                 if (supervisor) {
                     supervisor = yield employee_model_1.default.findByPk(supervisor);
                     oneData.supervisor = { id: supervisor.id, fullName: `${supervisor.firstName} ${supervisor.middleName} ${supervisor.lastName}` };
@@ -81,6 +81,7 @@ class Controller {
                         payload: oneData
                     });
                 }
+                return res.status(404).json({ message: "Employee not found" });
             }
             catch (error) {
                 return res.status(400).json({ message: error.message });

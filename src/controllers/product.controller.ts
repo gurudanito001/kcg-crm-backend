@@ -60,6 +60,7 @@ class Controller {
           payload: oneData
         })
       }
+      return res.status(404).json({message: "Product not found"})
     } catch (error: any) {
       return res.status(400).json({message: error.message})
     }
@@ -68,13 +69,13 @@ class Controller {
   public async getByProductGroupId(req: Request, res: Response){
     let id = req.params.id;
     try {
-      let oneData = await Product.findAll({ where: {productGroupId: id}}); 
-      if(oneData){
+      let allData = await Product.findAll({ where: {productGroupId: id}}); 
+      if(allData){
         return res.status(200).json({
           message: "Products Fetched Successfully",
           status: "success",
           statusCode: 200,
-          payload: oneData
+          payload: allData
         })
       }
     } catch (error: any) {
@@ -86,6 +87,18 @@ class Controller {
     let id = req.params.id;
     let data = req.body;
     try {
+      let imagesFromDB = data.images.filter( (item: string) => item.startsWith("https://"));
+      let imagesFromLocal = data.images.filter( (item: string) => item.startsWith("data:image"));
+
+      if(imagesFromLocal.length > 0){
+        let imagesUrls = await Promise.all(
+          imagesFromLocal.map(async (base64Img: any) => {
+            let picture = await uploadImage({data: base64Img});
+            return picture.secure_url;
+          })
+        )
+        data.images = [...imagesFromDB, ...imagesUrls];
+      }
       let updatedData = await Product.update(data, {
         where: {id: id}
       }); 

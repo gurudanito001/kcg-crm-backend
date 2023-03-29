@@ -74,9 +74,9 @@ import sequelize from "../dbConnection";
       type: DataTypes.STRING,
     },
     registration: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
     },
-    delivery: {
+    deliveryBy: {
       type: DataTypes.STRING,
     },
     vatDeduction: {

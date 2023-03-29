@@ -1,11 +1,17 @@
 import InvoiceRequestForm from "../models/invoiceRequestForm.model";
 import Interfaces  from "../interfaces";
 import { Request, Response } from "express";
+import { uploadImage } from "../services/imageService";
 
 class Controller {
   public async create(req: Request, res: Response){
     let data = req.body;
     try {
+      let result = await uploadImage({ data: data.warrantyCertificate });
+      if(!result){
+        return res.status(400).json({message: "Could not Save Logo"})
+      }
+      data.warrantyCertificate = result.secure_url
       let savedData = await InvoiceRequestForm.create(data); 
       if(savedData){
         return res.status(201).json({
@@ -49,6 +55,7 @@ class Controller {
           payload: oneData
         })
       }
+      return res.status(404).json({message: "Invoice Request Form not found"})
     } catch (error: any) {
       return res.status(400).json({message: error.message})
     }
@@ -58,6 +65,14 @@ class Controller {
     let id = req.params.id;
     let data = req.body;
     try {
+      if(data.warrantyCertificate.startsWith("data:image")){
+        let result = await uploadImage({ data: data.warrantyCertificate });
+        if(!result){
+          return res.status(400).json({message: "Could not Save Image"})
+        }
+        data.warrantyCertificate = result.secure_url
+      }
+      
       let updatedData = await InvoiceRequestForm.update(data, {
         where: {id: id}
       }); 

@@ -78,9 +78,9 @@ InvoiceRequestForm.init({
         type: sequelize_1.DataTypes.STRING,
     },
     registration: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.BOOLEAN,
     },
-    delivery: {
+    deliveryBy: {
         type: sequelize_1.DataTypes.STRING,
     },
     vatDeduction: {

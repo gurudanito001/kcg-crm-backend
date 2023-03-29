@@ -67,6 +67,7 @@ class Controller {
                         payload: oneData
                     });
                 }
+                return res.status(404).json({ message: "Customer Visit Report not found" });
             }
             catch (error) {
                 return res.status(400).json({ message: error.message });

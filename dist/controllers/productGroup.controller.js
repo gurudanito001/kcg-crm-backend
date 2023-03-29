@@ -65,6 +65,7 @@ class Controller {
                         payload: oneData
                     });
                 }
+                return res.status(404).json({ message: "Product Group not found" });
             }
             catch (error) {
                 return res.status(400).json({ message: error.message });

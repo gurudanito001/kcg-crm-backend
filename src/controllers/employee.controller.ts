@@ -45,7 +45,7 @@ class Controller {
     let id = req.params.id;
     try {
       let oneData: any = await Employee.findByPk(id); 
-      let {supervisor, productHead, locationManager, subordinate} = oneData;
+      let {supervisor, productHead, locationManager} = oneData;
       if(supervisor){
         supervisor = await Employee.findByPk(supervisor)
         oneData.supervisor = {id: supervisor.id, fullName: `${supervisor.firstName} ${supervisor.middleName} ${supervisor.lastName}`}
@@ -58,8 +58,6 @@ class Controller {
         locationManager = await Employee.findByPk(locationManager)
         oneData.locationManager = {id: locationManager.id, fullName: `${locationManager.firstName} ${locationManager.middleName} ${locationManager.lastName}`}
       }
-      
-      
       if(oneData){
         return res.status(200).json({
           message: "Employee Fetched Successfully",
@@ -68,6 +66,7 @@ class Controller {
           payload: oneData
         })
       }
+      return res.status(404).json({message: "Employee not found"})
     } catch (error: any) {
       return res.status(400).json({message: error.message})
     }

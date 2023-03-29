@@ -60,6 +60,7 @@ class Controller {
           payload: oneData
         })
       }
+      return res.status(404).json({message: "Marketting Activity not found"})
     } catch (error: any) {
       return res.status(400).json({message: error.message})
     }

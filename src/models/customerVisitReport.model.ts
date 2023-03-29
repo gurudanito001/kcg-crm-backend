@@ -75,5 +75,5 @@ import sequelize from "../dbConnection";
     modelName: 'CustomerVisitReport',
   });
 
-  CustomerVisitReport.sync({force: true}).then(()=>console.log("CustomerVisitReport was successfully synced"));
+  CustomerVisitReport.sync().then(()=>console.log("CustomerVisitReport was successfully synced"));
 

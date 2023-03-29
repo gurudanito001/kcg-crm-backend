@@ -13,11 +13,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const invoiceRequestForm_model_1 = __importDefault(require("../models/invoiceRequestForm.model"));
+const imageService_1 = require("../services/imageService");
 class Controller {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let data = req.body;
             try {
+                let result = yield (0, imageService_1.uploadImage)({ data: data.warrantyCertificate });
+                if (!result) {
+                    return res.status(400).json({ message: "Could not Save Logo" });
+                }
+                data.warrantyCertificate = result.secure_url;
                 let savedData = yield invoiceRequestForm_model_1.default.create(data);
                 if (savedData) {
                     return res.status(201).json({
@@ -65,6 +71,7 @@ class Controller {
                         payload: oneData
                     });
                 }
+                return res.status(404).json({ message: "Invoice Request Form not found" });
             }
             catch (error) {
                 return res.status(400).json({ message: error.message });
@@ -76,6 +83,13 @@ class Controller {
             let id = req.params.id;
             let data = req.body;
             try {
+                if (data.warrantyCertificate.startsWith("data:image")) {
+                    let result = yield (0, imageService_1.uploadImage)({ data: data.warrantyCertificate });
+                    if (!result) {
+                        return res.status(400).json({ message: "Could not Save Image" });
+                    }
+                    data.warrantyCertificate = result.secure_url;
+                }
                 let updatedData = yield invoiceRequestForm_model_1.default.update(data, {
                     where: { id: id }
                 });

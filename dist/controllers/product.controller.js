@@ -73,6 +73,7 @@ class Controller {
                         payload: oneData
                     });
                 }
+                return res.status(404).json({ message: "Product not found" });
             }
             catch (error) {
                 return res.status(400).json({ message: error.message });
@@ -83,13 +84,13 @@ class Controller {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
             try {
-                let oneData = yield product_model_1.default.findAll({ where: { productGroupId: id } });
-                if (oneData) {
+                let allData = yield product_model_1.default.findAll({ where: { productGroupId: id } });
+                if (allData) {
                     return res.status(200).json({
                         message: "Products Fetched Successfully",
                         status: "success",
                         statusCode: 200,
-                        payload: oneData
+                        payload: allData
                     });
                 }
             }
@@ -103,6 +104,15 @@ class Controller {
             let id = req.params.id;
             let data = req.body;
             try {
+                let imagesFromDB = data.images.filter((item) => item.startsWith("https://"));
+                let imagesFromLocal = data.images.filter((item) => item.startsWith("data:image"));
+                if (imagesFromLocal.length > 0) {
+                    let imagesUrls = yield Promise.all(imagesFromLocal.map((base64Img) => __awaiter(this, void 0, void 0, function* () {
+                        let picture = yield (0, imageService_1.uploadImage)({ data: base64Img });
+                        return picture.secure_url;
+                    })));
+                    data.images = [...imagesFromDB, ...imagesUrls];
+                }
                 let updatedData = yield product_model_1.default.update(data, {
                     where: { id: id }
                 });
