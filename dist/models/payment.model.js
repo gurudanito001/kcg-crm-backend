@@ -79,5 +79,5 @@ Payment.init({
     sequelize: dbConnection_1.default,
     modelName: 'Payment',
 });
-Payment.sync({ force: true }).then(() => console.log("Payment was successfully synced"));
+Payment.sync().then(() => console.log("Payment was successfully synced"));
 //# sourceMappingURL=payment.model.js.map

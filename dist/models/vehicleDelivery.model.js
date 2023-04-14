@@ -78,5 +78,5 @@ VehicleDelivery.init({
     sequelize: dbConnection_1.default,
     modelName: 'VehicleDelivery',
 });
-VehicleDelivery.sync({ force: true }).then(() => console.log("VehicleDelivery was successfully synced"));
+VehicleDelivery.sync().then(() => console.log("VehicleDelivery was successfully synced"));
 //# sourceMappingURL=vehicleDelivery.model.js.map

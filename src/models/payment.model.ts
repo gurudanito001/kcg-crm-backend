@@ -77,5 +77,5 @@ import sequelize from "../dbConnection";
     modelName: 'Payment',
   });
 
-  Payment.sync({force: true}).then(()=>console.log("Payment was successfully synced"));
+  Payment.sync().then(()=>console.log("Payment was successfully synced"));
 

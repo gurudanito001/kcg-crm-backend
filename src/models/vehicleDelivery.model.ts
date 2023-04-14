@@ -76,5 +76,5 @@ import sequelize from "../dbConnection";
     modelName: 'VehicleDelivery',
   });
 
-  VehicleDelivery.sync({force:true}).then(()=>console.log("VehicleDelivery was successfully synced"));
+  VehicleDelivery.sync().then(()=>console.log("VehicleDelivery was successfully synced"));
 
