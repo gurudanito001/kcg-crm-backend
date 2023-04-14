@@ -17,15 +17,15 @@ Message.init({
         allowNull: false,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
     },
-    senderId: {
-        type: sequelize_1.DataTypes.UUID,
+    sender: {
+        type: sequelize_1.DataTypes.JSON,
         allowNull: false,
     },
     receiverId: {
         type: sequelize_1.DataTypes.UUID,
         allowNull: false,
     },
-    resourceId: {
+    resourceUrl: {
         type: sequelize_1.DataTypes.UUID,
     },
     message: {

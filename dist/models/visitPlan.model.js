@@ -20,7 +20,7 @@ VisitPlan.init({
     employeeId: {
         type: sequelize_1.DataTypes.UUID,
     },
-    weeklyVisitPlan: {
+    weekStarting: {
         type: sequelize_1.DataTypes.TEXT,
     },
     monthlyVisitPlan: {

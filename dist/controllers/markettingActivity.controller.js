@@ -45,13 +45,58 @@ class Controller {
         return __awaiter(this, void 0, void 0, function* () {
             let data = req.body;
             try {
-                let allData = yield markettingActivity_model_1.default.findAll();
+                let allData = yield markettingActivity_model_1.default.findAll({
+                    order: [['createdAt', 'DESC']]
+                });
                 if (allData) {
                     return res.status(200).json({
                         message: "Marketting Activity Fetched Successfully",
                         status: "success",
                         statusCode: 200,
                         payload: allData
+                    });
+                }
+            }
+            catch (error) {
+                return res.status(400).json({ message: error.message });
+            }
+        });
+    }
+    getAllByEmployeeId(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let id = req.params.id;
+            try {
+                let allData = yield markettingActivity_model_1.default.findAll({
+                    where: { employeeId: id },
+                    order: [['createdAt', 'DESC']]
+                });
+                if (allData) {
+                    return res.status(200).json({
+                        message: "Marketting Activity Fetched Successfully",
+                        status: "success",
+                        statusCode: 200,
+                        payload: allData
+                    });
+                }
+            }
+            catch (error) {
+                return res.status(400).json({ message: error.message });
+            }
+        });
+    }
+    approveMarketingActivity(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let id = req.params.id;
+            try {
+                let updatedData = yield markettingActivity_model_1.default.update({ approved: true }, {
+                    where: { id: id }
+                });
+                if (updatedData) {
+                    return res.status(200).json({
+                        message: "Marketing Activity approved",
+                        status: "success",
+                        statusCode: 200,
+                        payload: updatedData
                     });
                 }
             }

@@ -29,10 +29,6 @@ import sequelize from "../dbConnection";
     },
     state: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty:{ msg: "state is required"},
-      }
     },
     lga: {
       type: DataTypes.STRING,
@@ -42,6 +38,10 @@ import sequelize from "../dbConnection";
     },
     address1: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty:{ msg: "address is required"},
+      }
     },
     address2: {
       type: DataTypes.STRING,
@@ -57,31 +57,23 @@ import sequelize from "../dbConnection";
     },
     industry: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty:{ msg: "industry is required"},
-      }
     },
     businessType: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty:{ msg: "businessType is required"},
-      }
     },
     customerType: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty:{ msg: "customerType is required"},
-      }
     },
     enquirySource: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty:{ msg: "enquirySource is required"},
-      }
+    },
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: "cold"
+    },
+    approved:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     extraData: {
       type: DataTypes.JSONB,

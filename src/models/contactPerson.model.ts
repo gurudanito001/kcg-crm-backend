@@ -36,10 +36,6 @@ import sequelize from "../dbConnection";
     },
     lastName: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty:{ msg: "lastName is required"},
-      }
     },
     email: {
       type: DataTypes.STRING,

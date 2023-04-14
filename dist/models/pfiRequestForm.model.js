@@ -17,6 +17,14 @@ PfiRequestForm.init({
         allowNull: false,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
     },
+    employeeId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+    },
+    customerId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+    },
     companyName: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
@@ -93,6 +101,13 @@ PfiRequestForm.init({
     },
     deliveryLocation: {
         type: sequelize_1.DataTypes.STRING,
+    },
+    approved: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false
+    },
+    approvedBy: {
+        type: sequelize_1.DataTypes.JSONB
     },
     additionalInformation: {
         type: sequelize_1.DataTypes.STRING,

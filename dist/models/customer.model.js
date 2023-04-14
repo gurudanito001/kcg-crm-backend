@@ -33,10 +33,6 @@ Customer.init({
     },
     state: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "state is required" },
-        }
     },
     lga: {
         type: sequelize_1.DataTypes.STRING,
@@ -46,6 +42,10 @@ Customer.init({
     },
     address1: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: "address is required" },
+        }
     },
     address2: {
         type: sequelize_1.DataTypes.STRING,
@@ -61,31 +61,23 @@ Customer.init({
     },
     industry: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "industry is required" },
-        }
     },
     businessType: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "businessType is required" },
-        }
     },
     customerType: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "customerType is required" },
-        }
     },
     enquirySource: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "enquirySource is required" },
-        }
+    },
+    status: {
+        type: sequelize_1.DataTypes.STRING,
+        defaultValue: "cold"
+    },
+    approved: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false,
     },
     extraData: {
         type: sequelize_1.DataTypes.JSONB,

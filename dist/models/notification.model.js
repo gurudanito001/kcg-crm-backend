@@ -24,7 +24,7 @@ Notification.init({
     url: {
         type: sequelize_1.DataTypes.STRING,
     },
-    resourceId: {
+    receiverId: {
         type: sequelize_1.DataTypes.UUID,
     },
     viewed: {

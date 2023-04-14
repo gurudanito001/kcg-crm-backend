@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import config from './config/config';
 import cors from 'cors';
 import AuthController from './controllers/auth.controller';
+import CompanyGroupController from './controllers/companyGroup.controller';
 import CompanyController from './controllers/company.controller';
 import BranchController from './controllers/branch.controller';
 import StateController from './controllers/state.controller';
@@ -21,10 +22,8 @@ import ProductGroupController from './controllers/productGroup.controller';
 import StaffCadreController from './controllers/staffCadre.controller';
 import VehicleDeliveryController from './controllers/vehicleDelivery.controller';
 import VisitPlanController from './controllers/visitPlan.controller';
-
-
-import sequelize from './dbConnection';
-import Employee from './models/employee.model';
+import SalesInvoiceController from './controllers/salesInvoice.controller';
+import MonthlyTargetController from './controllers/monthlyTarget.controller';
 
 
 const app: Express = express();
@@ -32,17 +31,10 @@ const app: Express = express();
 app.use(bodyParser.json({limit: '50mb'})); // define the size limit
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));	// define the size limit
 app.use(express.json());
-
-/* app.use(bodyParser.json())
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-) */
 app.use(cors());
 
 //Testing
-app.get('/test', (req, res) =>{
+app.get('/', (req, res) =>{
   res.send("KCG-CRM API is live!!!!!")
 })
 
@@ -50,6 +42,13 @@ app.get('/test', (req, res) =>{
 app.post('/auth/login', AuthController.login);
 app.post('/auth/forgotPassword', AuthController.forgotPassword);
 app.post('/auth/resetPassword', AuthController.resetPassword);
+
+// COMPANY GROUP
+app.post('/companyGroup/create', CompanyGroupController.create);
+app.get('/companyGroup', CompanyGroupController.getAll);
+app.get('/companyGroup/:id', CompanyGroupController.getOne);
+app.put('/companyGroup/:id', CompanyGroupController.updateOne);
+app.delete('/companyGroup/:id', CompanyGroupController.deleteOne);
 
 // COMPANY
 app.post('/company/create', CompanyController.create);
@@ -62,7 +61,7 @@ app.delete('/company/:id', CompanyController.deleteOne);
 app.post('/branch/create', BranchController.create);
 app.get('/branch', BranchController.getAll);
 app.get('/branch/:id', BranchController.getOne);
-app.get('/branch/company/:id', BranchController.getOneByCompanyId);
+app.get('/branch/company/:id', BranchController.getAllByCompanyId);
 app.put('/branch/:id', BranchController.updateOne);
 app.delete('/branch/:id', BranchController.deleteOne);
 
@@ -91,13 +90,16 @@ app.delete('/contactPerson/:id', ContactPersonController.deleteOne);
 //Customer
 app.post('/customer/create', CustomerController.create);
 app.get('/customer', CustomerController.getAll);
+app.get('/customer/employee/:id', CustomerController.getAllCustomersByEmployeeId);
 app.get('/customer/:id', CustomerController.getOne);
 app.put('/customer/:id', CustomerController.updateOne);
+app.put('/customer/approve/:id', CustomerController.approveCustomer);
 app.delete('/customer/:id', CustomerController.deleteOne);
 
 //Customer Visit
 app.post('/customerVisit/create', CustomerVisitController.create);
 app.get('/customerVisit', CustomerVisitController.getAll);
+app.get('/customerVisit/employee/:id', CustomerVisitController.getAllByEmployeeId);
 app.get('/customerVisit/:id', CustomerVisitController.getOne);
 app.put('/customerVisit/:id', CustomerVisitController.updateOne);
 app.delete('/customerVisit/:id', CustomerVisitController.deleteOne);
@@ -119,15 +121,19 @@ app.delete('/employee/:id', EmployeeController.deleteOne);
 //Invoice Request Form
 app.post('/invoiceRequestForm/create', InvoiceRequestFormController.create);
 app.get('/invoiceRequestForm', InvoiceRequestFormController.getAll);
+app.get('/invoiceRequestForm/employee/:id', InvoiceRequestFormController.getAllByEmployeeId);
 app.get('/invoiceRequestForm/:id', InvoiceRequestFormController.getOne);
 app.put('/invoiceRequestForm/:id', InvoiceRequestFormController.updateOne);
+app.put('/invoiceRequestForm/approve/:id', InvoiceRequestFormController.approveInvoiceRequest);
 app.delete('/invoiceRequestForm/:id', InvoiceRequestFormController.deleteOne);
 
 //Invoice Request Form
 app.post('/markettingActivity/create', MarkettingActivityController.create);
 app.get('/markettingActivity', MarkettingActivityController.getAll);
+app.get('/markettingActivity/employee/:id', MarkettingActivityController.getAllByEmployeeId);
 app.get('/markettingActivity/:id', MarkettingActivityController.getOne);
 app.put('/markettingActivity/:id', MarkettingActivityController.updateOne);
+app.put('/markettingActivity/approve/:id', MarkettingActivityController.approveMarketingActivity);
 app.delete('/markettingActivity/:id', MarkettingActivityController.deleteOne);
 
 //Payment
@@ -140,8 +146,10 @@ app.delete('/payment/:id', PaymentController.deleteOne);
 //PFI Request Form
 app.post('/pfiRequestForm/create', PfiRequestFormController.create);
 app.get('/pfiRequestForm', PfiRequestFormController.getAll);
+app.get('/pfiRequestForm/employee/:id', PfiRequestFormController.getAllByEmployeeId);
 app.get('/pfiRequestForm/:id', PfiRequestFormController.getOne);
 app.put('/pfiRequestForm/:id', PfiRequestFormController.updateOne);
+app.put('/pfiRequestForm/approve/:id', PfiRequestFormController.approvePfiRequest);
 app.delete('/pfiRequestForm/:id', PfiRequestFormController.deleteOne);
 
 //Product
@@ -176,9 +184,22 @@ app.delete('/vehicleDelivery/:id', VehicleDeliveryController.deleteOne);
 //Visit Plan
 app.post('/visitPlan/create', VisitPlanController.create);
 app.get('/visitPlan', VisitPlanController.getAll);
+app.get('/visitPlan/employee/:id', VisitPlanController.getAllByEmployeeId);
 app.get('/visitPlan/:id', VisitPlanController.getOne);
 app.put('/visitPlan/:id', VisitPlanController.updateOne);
 app.delete('/visitPlan/:id', VisitPlanController.deleteOne);
+
+app.post('/salesInvoice/create', SalesInvoiceController.create);
+app.get('/salesInvoice', SalesInvoiceController.getAll);
+app.get('/salesInvoice/:id', SalesInvoiceController.getOne);
+app.put('/salesInvoice/:id', SalesInvoiceController.updateOne);
+app.delete('/salesInvoice/:id', SalesInvoiceController.deleteOne);
+
+app.post('/monthlyTarget/create', MonthlyTargetController.create);
+app.get('/monthlyTarget', MonthlyTargetController.getAll);
+app.get('/monthlyTarget/:id', MonthlyTargetController.getOne);
+app.put('/monthlyTarget/:id', MonthlyTargetController.updateOne);
+app.delete('/monthlyTarget/:id', MonthlyTargetController.deleteOne);
 
 
 export default app;

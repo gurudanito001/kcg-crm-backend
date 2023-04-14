@@ -13,6 +13,18 @@ import sequelize from "../dbConnection";
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
+    invoiceRequestFormId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    employeeId: {
+      type: DataTypes.UUID,
+      allowNull: false
+    },
+    customerId: {
+      type: DataTypes.UUID,
+      allowNull: false
+    },
     customerName: {
       type: DataTypes.STRING,
     },
@@ -64,5 +76,5 @@ import sequelize from "../dbConnection";
     modelName: 'VehicleDelivery',
   });
 
-  VehicleDelivery.sync().then(()=>console.log("VehicleDelivery was successfully synced"));
+  VehicleDelivery.sync({force:true}).then(()=>console.log("VehicleDelivery was successfully synced"));
 

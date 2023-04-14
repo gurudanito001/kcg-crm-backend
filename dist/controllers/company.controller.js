@@ -24,16 +24,14 @@ class Controller {
                 if (!result) {
                     return res.status(400).json({ message: "Could not Save Logo" });
                 }
-                let { name, group, email, code, address, brands, extraData } = data;
-                let savedData = yield company_model_1.default.create({ name, group, email, code, address, brands, logo: result.secure_url, extraData });
-                if (savedData) {
-                    return res.status(201).json({
-                        message: "Company Created Successfully",
-                        status: "success",
-                        statusCode: 201,
-                        payload: savedData
-                    });
-                }
+                data.logo = result.secure_url;
+                let savedData = yield company_model_1.default.create(data);
+                return res.status(201).json({
+                    message: "Company Created Successfully",
+                    status: "success",
+                    statusCode: 201,
+                    payload: savedData
+                });
             }
             catch (error) {
                 return res.status(400).json({ message: error.message });
@@ -42,17 +40,16 @@ class Controller {
     }
     getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = req.body;
             try {
-                let allData = yield company_model_1.default.findAll();
-                if (allData) {
-                    return res.status(200).json({
-                        message: "Companies Fetched Successfully",
-                        status: "success",
-                        statusCode: 200,
-                        payload: allData
-                    });
-                }
+                let allData = yield company_model_1.default.findAll({
+                    order: [['createdAt', 'DESC']]
+                });
+                return res.status(200).json({
+                    message: "Companies Fetched Successfully",
+                    status: "success",
+                    statusCode: 200,
+                    payload: allData
+                });
             }
             catch (error) {
                 return res.status(400).json({ message: error.message });
@@ -64,11 +61,11 @@ class Controller {
             let id = req.params.id;
             try {
                 let oneData = yield company_model_1.default.findByPk(id);
-                let branches = yield branch_model_1.default.findAll({
-                    where: { companyId: id }
-                });
-                oneData.branches = branches;
                 if (oneData) {
+                    let branches = yield branch_model_1.default.findAll({
+                        where: { companyId: id }
+                    });
+                    oneData.branches = branches;
                     return res.status(200).json({
                         message: "Company Fetched Successfully",
                         status: "success",
@@ -98,14 +95,12 @@ class Controller {
                 let updatedData = yield company_model_1.default.update(data, {
                     where: { id: id }
                 });
-                if (updatedData) {
-                    return res.status(200).json({
-                        message: "Company updated successfully",
-                        status: "success",
-                        statusCode: 200,
-                        payload: updatedData
-                    });
-                }
+                return res.status(200).json({
+                    message: "Company updated successfully",
+                    status: "success",
+                    statusCode: 200,
+                    payload: updatedData
+                });
             }
             catch (error) {
                 return res.status(400).json({ message: error.message });
@@ -119,14 +114,12 @@ class Controller {
                 let deletedData = yield company_model_1.default.destroy({
                     where: { id: id }
                 });
-                if (deletedData) {
-                    return res.status(200).json({
-                        message: "Company deleted successfully",
-                        status: "success",
-                        statusCode: 200,
-                        payload: deletedData
-                    });
-                }
+                return res.status(200).json({
+                    message: "Company deleted successfully",
+                    status: "success",
+                    statusCode: 200,
+                    payload: deletedData
+                });
             }
             catch (error) {
                 return res.status(400).json({ message: error.message });

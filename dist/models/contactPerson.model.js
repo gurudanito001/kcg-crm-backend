@@ -40,10 +40,6 @@ ContactPerson.init({
     },
     lastName: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "lastName is required" },
-        }
     },
     email: {
         type: sequelize_1.DataTypes.STRING,

@@ -23,7 +23,9 @@ class Controller {
   public async getAll(req: Request, res: Response){
     let data = req.body;
     try {
-      let allData = await VehicleDelivery.findAll(); 
+      let allData = await VehicleDelivery.findAll({
+        order: [['createdAt', 'DESC']]
+      }); 
       if(allData){
         return res.status(200).json({
           message: "Vehicle Delivery Fetched Successfully",

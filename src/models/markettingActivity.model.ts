@@ -10,6 +10,10 @@ var MarkettingActivity = sequelize.define('MarkettingActivity', {
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
+    employeeId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -75,6 +79,10 @@ var MarkettingActivity = sequelize.define('MarkettingActivity', {
     },
     pdfDetails: {
       type: DataTypes.STRING,
+    },
+    approved: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     },
     extraData: {
       type: DataTypes.JSONB,

@@ -16,7 +16,7 @@ import sequelize from "../dbConnection";
     employeeId: {
       type: DataTypes.UUID,
     },
-    weeklyVisitPlan: {
+    weekStarting: {
       type: DataTypes.TEXT,
     },
     monthlyVisitPlan: {

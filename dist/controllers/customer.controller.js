@@ -37,10 +37,34 @@ class Controller {
         return __awaiter(this, void 0, void 0, function* () {
             let data = req.body;
             try {
-                let allData = yield customer_model_1.default.findAll();
+                let allData = yield customer_model_1.default.findAll({
+                    order: [['employeeId', 'DESC']]
+                });
                 if (allData) {
                     return res.status(200).json({
-                        message: "Customer Fetched Successfully",
+                        message: "Customers Fetched Successfully",
+                        status: "success",
+                        statusCode: 200,
+                        payload: allData
+                    });
+                }
+            }
+            catch (error) {
+                return res.status(400).json({ message: error.message });
+            }
+        });
+    }
+    getAllCustomersByEmployeeId(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let id = req.params.id;
+            try {
+                let allData = yield customer_model_1.default.findAll({
+                    where: { employeeId: id },
+                    order: [['createdAt', 'DESC']]
+                });
+                if (allData) {
+                    return res.status(200).json({
+                        message: "Customers Fetched Successfully",
                         status: "success",
                         statusCode: 200,
                         payload: allData
@@ -83,6 +107,27 @@ class Controller {
                 if (updatedData) {
                     return res.status(200).json({
                         message: "Customer updated successfully",
+                        status: "success",
+                        statusCode: 200,
+                        payload: updatedData
+                    });
+                }
+            }
+            catch (error) {
+                return res.status(400).json({ message: error.message });
+            }
+        });
+    }
+    approveCustomer(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let id = req.params.id;
+            try {
+                let updatedData = yield customer_model_1.default.update({ approved: true }, {
+                    where: { id: id }
+                });
+                if (updatedData) {
+                    return res.status(200).json({
+                        message: "Customer approved",
                         status: "success",
                         statusCode: 200,
                         payload: updatedData

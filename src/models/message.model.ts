@@ -13,15 +13,15 @@ import sequelize from "../dbConnection";
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
-    senderId: {
-      type: DataTypes.UUID,
+    sender: {
+      type: DataTypes.JSON,
       allowNull: false,
     },
     receiverId: {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    resourceId: {
+    resourceUrl: {
       type: DataTypes.UUID,
     },
     message: {

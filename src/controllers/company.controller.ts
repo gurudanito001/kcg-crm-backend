@@ -12,33 +12,31 @@ class Controller {
       if(!result){
         return res.status(400).json({message: "Could not Save Logo"})
       }
-      let {name, group, email, code, address, brands, extraData} = data
-      let savedData = await Company.create({name, group, email, code, address, brands, logo: result.secure_url, extraData});
-      if(savedData){
-        return res.status(201).json({
-          message: "Company Created Successfully",
-          status: "success",
-          statusCode: 201,
-          payload: savedData
-        })
-      }
+      data.logo = result.secure_url
+      let savedData = await Company.create(data);
+      
+      return res.status(201).json({
+        message: "Company Created Successfully",
+        status: "success",
+        statusCode: 201,
+        payload: savedData
+      })
     } catch (error: any) {
       return res.status(400).json({message: error.message})
     }
   }
 
   public async getAll(req: Request, res: Response){
-    let data = req.body;
     try {
-      let allData = await Company.findAll(); 
-      if(allData){
-        return res.status(200).json({
-          message: "Companies Fetched Successfully",
-          status: "success",
-          statusCode: 200,
-          payload: allData
-        })
-      }
+      let allData = await Company.findAll({
+        order: [['createdAt', 'DESC']]
+      }); 
+      return res.status(200).json({
+        message: "Companies Fetched Successfully",
+        status: "success",
+        statusCode: 200,
+        payload: allData
+      })
     } catch (error: any) {
       return res.status(400).json({message: error.message})
     }
@@ -48,11 +46,11 @@ class Controller {
     let id = req.params.id;
     try {
       let oneData: any = await Company.findByPk(id); 
-      let branches = await Branch.findAll({
-        where: {companyId: id}
-      })
-      oneData.branches = branches;
       if(oneData){
+        let branches = await Branch.findAll({
+          where: {companyId: id}
+        })
+        oneData.branches = branches;
         return res.status(200).json({
           message: "Company Fetched Successfully",
           status: "success",
@@ -80,15 +78,13 @@ class Controller {
       
       let updatedData = await Company.update(data, {
         where: {id: id}
-      }); 
-      if(updatedData){
-        return res.status(200).json({
-          message: "Company updated successfully",
-          status: "success",
-          statusCode: 200,
-          payload: updatedData
-        })
-      }
+      });
+      return res.status(200).json({
+        message: "Company updated successfully",
+        status: "success",
+        statusCode: 200,
+        payload: updatedData
+      })
     } catch (error: any) {
       return res.status(400).json({message: error.message})
     }
@@ -100,14 +96,12 @@ class Controller {
       let deletedData = await Company.destroy({
         where: {id: id}
       }); 
-      if(deletedData){
-        return res.status(200).json({
-          message: "Company deleted successfully",
-          status: "success",
-          statusCode: 200,
-          payload: deletedData
-        })
-      }
+      return res.status(200).json({
+        message: "Company deleted successfully",
+        status: "success",
+        statusCode: 200,
+        payload: deletedData
+      })
     } catch (error: any) {
       return res.status(400).json({message: error.message})
     }

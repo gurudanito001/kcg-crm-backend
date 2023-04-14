@@ -34,13 +34,54 @@ class Controller {
   public async getAll(req: Request, res: Response){
     let data = req.body;
     try {
-      let allData = await MarkettingActivity.findAll(); 
+      let allData = await MarkettingActivity.findAll({
+        order: [['createdAt', 'DESC']]
+      }); 
       if(allData){
         return res.status(200).json({
           message: "Marketting Activity Fetched Successfully",
           status: "success",
           statusCode: 200,
           payload: allData
+        })
+      }
+    } catch (error: any) {
+      return res.status(400).json({message: error.message})
+    }
+  }
+
+  public async getAllByEmployeeId(req: Request, res: Response){
+    let id = req.params.id;
+    try {
+      let allData = await MarkettingActivity.findAll({
+        where: {employeeId: id},
+        order: [['createdAt', 'DESC']]
+      }); 
+      if(allData){
+        return res.status(200).json({
+          message: "Marketting Activity Fetched Successfully",
+          status: "success",
+          statusCode: 200,
+          payload: allData
+        })
+      }
+    } catch (error: any) {
+      return res.status(400).json({message: error.message})
+    }
+  }
+
+  public async approveMarketingActivity(req: Request, res: Response){
+    let id = req.params.id;
+    try {
+      let updatedData = await MarkettingActivity.update( {approved: true}, {
+        where: {id: id}
+      }); 
+      if(updatedData){
+        return res.status(200).json({
+          message: "Marketing Activity approved",
+          status: "success",
+          statusCode: 200,
+          payload: updatedData
         })
       }
     } catch (error: any) {

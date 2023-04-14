@@ -23,10 +23,32 @@ class Controller {
   public async getAll(req: Request, res: Response){
     let data = req.body;
     try {
-      let allData = await CustomerVisit.findAll(); 
+      let allData = await CustomerVisit.findAll({
+        order: [['createdAt', 'DESC']]
+      }); 
       if(allData){
         return res.status(200).json({
           message: "Customer Visit Fetched Successfully",
+          status: "success",
+          statusCode: 200,
+          payload: allData
+        })
+      }
+    } catch (error: any) {
+      return res.status(400).json({message: error.message})
+    }
+  }
+
+  public async getAllByEmployeeId(req: Request, res: Response){
+    let id = req.params.id;
+    try {
+      let allData = await CustomerVisit.findAll({
+        where: {employeeId: id},
+        order: [['createdAt', 'DESC']]
+      }); 
+      if(allData){
+        return res.status(200).json({
+          message: "Customer Visits Fetched Successfully",
           status: "success",
           statusCode: 200,
           payload: allData

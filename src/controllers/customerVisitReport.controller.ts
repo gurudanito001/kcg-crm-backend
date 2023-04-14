@@ -25,7 +25,9 @@ class Controller {
   public async getAll(req: Request, res: Response){
     let data = req.body;
     try {
-      let allData = await CustomerVisitReport.findAll(); 
+      let allData = await CustomerVisitReport.findAll({
+        order: [['createdAt', 'DESC']]
+      }); 
       if(allData){
         return res.status(200).json({
           message: "Customer Visit Report Fetched Successfully",

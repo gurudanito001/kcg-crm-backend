@@ -20,7 +20,7 @@ import sequelize from "../dbConnection";
     url: {
       type: DataTypes.STRING,
     },
-    resourceId: {
+    receiverId: {
       type: DataTypes.UUID,
     },
     viewed: {

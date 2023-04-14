@@ -17,6 +17,18 @@ InvoiceRequestForm.init({
         allowNull: false,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
     },
+    employeeId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+    },
+    customerId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+    },
+    pfiRequestFormId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+    },
     invoiceName: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
@@ -78,7 +90,7 @@ InvoiceRequestForm.init({
         type: sequelize_1.DataTypes.STRING,
     },
     registration: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.STRING,
     },
     deliveryBy: {
         type: sequelize_1.DataTypes.STRING,
@@ -121,6 +133,10 @@ InvoiceRequestForm.init({
     },
     servicePackageDetails: {
         type: sequelize_1.DataTypes.STRING,
+    },
+    approved: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false
     },
     approvedBy: {
         type: sequelize_1.DataTypes.JSON,

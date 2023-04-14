@@ -39,7 +39,9 @@ class Controller {
         return __awaiter(this, void 0, void 0, function* () {
             let data = req.body;
             try {
-                let allData = yield customerVisitReport_model_1.default.findAll();
+                let allData = yield customerVisitReport_model_1.default.findAll({
+                    order: [['createdAt', 'DESC']]
+                });
                 if (allData) {
                     return res.status(200).json({
                         message: "Customer Visit Report Fetched Successfully",

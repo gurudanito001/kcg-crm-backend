@@ -56,7 +56,10 @@ class Controller {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
             try {
-                let allData = yield contactPerson_model_1.default.findAll({ where: { customerId: id } });
+                let allData = yield contactPerson_model_1.default.findAll({
+                    where: { customerId: id },
+                    order: [['createdAt', 'DESC']]
+                });
                 if (allData) {
                     return res.status(200).json({
                         message: "Contact Persons Fetched Successfully",

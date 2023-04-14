@@ -13,6 +13,14 @@ import sequelize from "../dbConnection";
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
+    employeeId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    customerId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
     companyName: {
       type: DataTypes.STRING,
       allowNull: false
@@ -89,6 +97,13 @@ import sequelize from "../dbConnection";
     },
     deliveryLocation: {
       type: DataTypes.STRING,
+    },
+    approved: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    approvedBy: {
+      type: DataTypes.JSONB
     },
     additionalInformation: {
       type: DataTypes.STRING,

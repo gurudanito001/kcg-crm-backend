@@ -37,10 +37,34 @@ class Controller {
         return __awaiter(this, void 0, void 0, function* () {
             let data = req.body;
             try {
-                let allData = yield visitPlan_model_1.default.findAll();
+                let allData = yield visitPlan_model_1.default.findAll({
+                    order: [['createdAt', 'DESC']]
+                });
                 if (allData) {
                     return res.status(200).json({
                         message: "Visit Plan Fetched Successfully",
+                        status: "success",
+                        statusCode: 200,
+                        payload: allData
+                    });
+                }
+            }
+            catch (error) {
+                return res.status(400).json({ message: error.message });
+            }
+        });
+    }
+    getAllByEmployeeId(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let id = req.params.id;
+            try {
+                let allData = yield visitPlan_model_1.default.findAll({
+                    where: { employeeId: id },
+                    order: [['createdAt', 'DESC']]
+                });
+                if (allData) {
+                    return res.status(200).json({
+                        message: "Visit Plans Fetched Successfully",
                         status: "success",
                         statusCode: 200,
                         payload: allData

@@ -14,6 +14,10 @@ var MarkettingActivity = dbConnection_1.default.define('MarkettingActivity', {
         allowNull: false,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
     },
+    employeeId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+    },
     name: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
@@ -79,6 +83,10 @@ var MarkettingActivity = dbConnection_1.default.define('MarkettingActivity', {
     },
     pdfDetails: {
         type: sequelize_1.DataTypes.STRING,
+    },
+    approved: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false
     },
     extraData: {
         type: sequelize_1.DataTypes.JSONB,

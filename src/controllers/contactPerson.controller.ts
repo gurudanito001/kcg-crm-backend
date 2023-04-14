@@ -40,7 +40,10 @@ class Controller {
   public async getAllByCustomerId(req: Request, res: Response){
     let id = req.params.id;
     try {
-      let allData = await ContactPerson.findAll( {where: {customerId: id}}); 
+      let allData = await ContactPerson.findAll({
+        where: {customerId: id},
+        order: [['createdAt', 'DESC']]
+      }); 
       if(allData){
         return res.status(200).json({
           message: "Contact Persons Fetched Successfully",

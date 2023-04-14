@@ -7,11 +7,11 @@ class Controller {
   public async create(req: Request, res: Response){
     let data = req.body;
     try {
-      let result = await uploadImage({ data: data.warrantyCertificate });
+      /* let result = await uploadImage({ data: data.warrantyCertificate });
       if(!result){
         return res.status(400).json({message: "Could not Save Logo"})
       }
-      data.warrantyCertificate = result.secure_url
+      data.warrantyCertificate = result.secure_url */
       let savedData = await InvoiceRequestForm.create(data); 
       if(savedData){
         return res.status(201).json({
@@ -29,10 +29,32 @@ class Controller {
   public async getAll(req: Request, res: Response){
     let data = req.body;
     try {
-      let allData = await InvoiceRequestForm.findAll(); 
+      let allData = await InvoiceRequestForm.findAll({
+        order: [['createdAt', 'DESC']]
+      }); 
       if(allData){
         return res.status(200).json({
           message: "Invoice Request Form Fetched Successfully",
+          status: "success",
+          statusCode: 200,
+          payload: allData
+        })
+      }
+    } catch (error: any) {
+      return res.status(400).json({message: error.message})
+    }
+  }
+
+  public async getAllByEmployeeId(req: Request, res: Response){
+    let id = req.params.id;
+    try {
+      let allData = await InvoiceRequestForm.findAll({
+        where: {employeeId: id},
+        order: [['createdAt', 'DESC']]
+      }); 
+      if(allData){
+        return res.status(200).json({
+          message: "Invoice Requests Fetched Successfully",
           status: "success",
           statusCode: 200,
           payload: allData
@@ -79,6 +101,25 @@ class Controller {
       if(updatedData){
         return res.status(200).json({
           message: "Invoice Request Form updated successfully",
+          status: "success",
+          statusCode: 200,
+          payload: updatedData
+        })
+      }
+    } catch (error: any) {
+      return res.status(400).json({message: error.message})
+    }
+  }
+
+  public async approveInvoiceRequest(req: Request, res: Response){
+    let id = req.params.id;
+    try {
+      let updatedData = await InvoiceRequestForm.update({approved: true}, {
+        where: {id: id}
+      }); 
+      if(updatedData){
+        return res.status(200).json({
+          message: "Invoice Request approved",
           status: "success",
           statusCode: 200,
           payload: updatedData

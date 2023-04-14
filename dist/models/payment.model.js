@@ -17,6 +17,18 @@ Payment.init({
         allowNull: false,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
     },
+    invoiceRequestFormId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+    },
+    customerId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+    },
+    employeeId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+    },
     invoiceNumber: {
         type: sequelize_1.DataTypes.STRING,
     },
@@ -67,5 +79,5 @@ Payment.init({
     sequelize: dbConnection_1.default,
     modelName: 'Payment',
 });
-Payment.sync().then(() => console.log("Payment was successfully synced"));
+Payment.sync({ force: true }).then(() => console.log("Payment was successfully synced"));
 //# sourceMappingURL=payment.model.js.map

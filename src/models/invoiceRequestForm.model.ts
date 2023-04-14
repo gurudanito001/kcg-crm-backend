@@ -13,6 +13,18 @@ import sequelize from "../dbConnection";
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
+    employeeId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    customerId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    pfiRequestFormId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
     invoiceName: {
       type: DataTypes.STRING,
       allowNull: false
@@ -74,7 +86,7 @@ import sequelize from "../dbConnection";
       type: DataTypes.STRING,
     },
     registration: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
     },
     deliveryBy: {
       type: DataTypes.STRING,
@@ -117,6 +129,10 @@ import sequelize from "../dbConnection";
     },
     servicePackageDetails: {
       type: DataTypes.STRING,
+    },
+    approved: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     },
     approvedBy: {
       type: DataTypes.JSON,

@@ -17,6 +17,18 @@ VehicleDelivery.init({
         allowNull: false,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
     },
+    invoiceRequestFormId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+    },
+    employeeId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false
+    },
+    customerId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false
+    },
     customerName: {
         type: sequelize_1.DataTypes.STRING,
     },
@@ -66,5 +78,5 @@ VehicleDelivery.init({
     sequelize: dbConnection_1.default,
     modelName: 'VehicleDelivery',
 });
-VehicleDelivery.sync().then(() => console.log("VehicleDelivery was successfully synced"));
+VehicleDelivery.sync({ force: true }).then(() => console.log("VehicleDelivery was successfully synced"));
 //# sourceMappingURL=vehicleDelivery.model.js.map

@@ -27,7 +27,9 @@ class Controller {
   public async getAll(req: Request, res: Response){
     let data = req.body;
     try {
-      let allData = await Employee.findAll(); 
+      let allData = await Employee.findAll({
+        order: [['createdAt', 'DESC']]
+      }); 
       if(allData){
         return res.status(200).json({
           message: "Employee Fetched Successfully",
@@ -45,18 +47,18 @@ class Controller {
     let id = req.params.id;
     try {
       let oneData: any = await Employee.findByPk(id); 
-      let {supervisor, productHead, locationManager} = oneData;
-      if(supervisor){
-        supervisor = await Employee.findByPk(supervisor)
-        oneData.supervisor = {id: supervisor.id, fullName: `${supervisor.firstName} ${supervisor.middleName} ${supervisor.lastName}`}
+      let supervisor, productHead, locationManager;
+      if(oneData?.supervisor){
+        supervisor = await Employee.findByPk(oneData?.supervisor)
+        oneData.supervisor = {id: oneData?.supervisor?.id, fullName: `${oneData?.supervisor?.firstName} ${oneData?.supervisor?.middleName} ${oneData?.supervisor?.lastName}`}
       }
-      if(productHead){
-        productHead = await Employee.findByPk(productHead)
-        oneData.productHead = {id: productHead.id, fullName: `${productHead.firstName} ${productHead.middleName} ${productHead.lastName}`}
+      if(oneData?.productHead){
+        productHead = await Employee.findByPk(oneData?.productHead)
+        oneData.productHead = {id: oneData?.productHead?.id, fullName: `${oneData?.productHead?.firstName} ${oneData?.productHead?.middleName} ${oneData?.productHead?.lastName}`}
       }
-      if(locationManager){
-        locationManager = await Employee.findByPk(locationManager)
-        oneData.locationManager = {id: locationManager.id, fullName: `${locationManager.firstName} ${locationManager.middleName} ${locationManager.lastName}`}
+      if(oneData?.locationManager){
+        locationManager = await Employee.findByPk(oneData?.locationManager)
+        oneData.locationManager = {id: oneData?.locationManager?.id, fullName: `${oneData?.locationManager?.firstName} ${oneData?.locationManager?.middleName} ${oneData?.locationManager?.lastName}`}
       }
       if(oneData){
         return res.status(200).json({

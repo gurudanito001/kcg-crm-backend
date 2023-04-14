@@ -13,6 +13,18 @@ import sequelize from "../dbConnection";
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
+    invoiceRequestFormId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    customerId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    employeeId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
     invoiceNumber: {
       type: DataTypes.STRING,
     },
@@ -65,5 +77,5 @@ import sequelize from "../dbConnection";
     modelName: 'Payment',
   });
 
-  Payment.sync().then(()=>console.log("Payment was successfully synced"));
+  Payment.sync({force: true}).then(()=>console.log("Payment was successfully synced"));
 

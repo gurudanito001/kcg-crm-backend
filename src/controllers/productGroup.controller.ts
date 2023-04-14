@@ -23,7 +23,9 @@ class Controller {
   public async getAll(req: Request, res: Response){
     let data = req.body;
     try {
-      let allData = await ProductGroup.findAll(); 
+      let allData = await ProductGroup.findAll({
+        order: [['createdAt', 'DESC']]
+      }); 
       if(allData){
         return res.status(200).json({
           message: "Product Group Fetched Successfully",
