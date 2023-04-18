@@ -15,6 +15,7 @@ class Controller {
         if(!newCustomer){
           return res.status(400).json({message: "Could not create new Customer"})
         }
+        data.customerId = newCustomer.id;
         let names = contactPerson.split(" ");
         newContactPerson = await ContactPerson.create({employeeId, customerId: newCustomer?.id, firstName: names[0], lastName: names[1], email: emailAddress, phoneNumber1: mobile, designation })
         if(!newContactPerson){
@@ -22,7 +23,6 @@ class Controller {
         }
       }
       delete data.customerType;
-      data.customerId = newCustomer.id;
       let savedData = await PfiRequestForm.create(data); 
       if(savedData){
         return res.status(201).json({

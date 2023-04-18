@@ -27,6 +27,7 @@ class Controller {
                     if (!newCustomer) {
                         return res.status(400).json({ message: "Could not create new Customer" });
                     }
+                    data.customerId = newCustomer.id;
                     let names = contactPerson.split(" ");
                     newContactPerson = yield contactPerson_model_1.default.create({ employeeId, customerId: newCustomer === null || newCustomer === void 0 ? void 0 : newCustomer.id, firstName: names[0], lastName: names[1], email: emailAddress, phoneNumber1: mobile, designation });
                     if (!newContactPerson) {
@@ -34,7 +35,6 @@ class Controller {
                     }
                 }
                 delete data.customerType;
-                data.customerId = newCustomer.id;
                 let savedData = yield pfiRequestForm_model_1.default.create(data);
                 if (savedData) {
                     return res.status(201).json({
