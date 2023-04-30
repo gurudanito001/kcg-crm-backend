@@ -25,7 +25,8 @@ const product_controller_1 = __importDefault(require("./controllers/product.cont
 const productGroup_controller_1 = __importDefault(require("./controllers/productGroup.controller"));
 const staffCadre_controller_1 = __importDefault(require("./controllers/staffCadre.controller"));
 const vehicleDelivery_controller_1 = __importDefault(require("./controllers/vehicleDelivery.controller"));
-const visitPlan_controller_1 = __importDefault(require("./controllers/visitPlan.controller"));
+const weeklyVisitPlan_controller_1 = __importDefault(require("./controllers/weeklyVisitPlan.controller"));
+const monthlyVisitPlan_controller_1 = __importDefault(require("./controllers/monthlyVisitPlan.controller"));
 const salesInvoice_controller_1 = __importDefault(require("./controllers/salesInvoice.controller"));
 const monthlyTarget_controller_1 = __importDefault(require("./controllers/monthlyTarget.controller"));
 const app = (0, express_1.default)();
@@ -161,22 +162,34 @@ app.get('/vehicleDelivery', vehicleDelivery_controller_1.default.getAll);
 app.get('/vehicleDelivery/:id', vehicleDelivery_controller_1.default.getOne);
 app.put('/vehicleDelivery/:id', vehicleDelivery_controller_1.default.updateOne);
 app.delete('/vehicleDelivery/:id', vehicleDelivery_controller_1.default.deleteOne);
-//Visit Plan
-app.post('/visitPlan/create', visitPlan_controller_1.default.create);
-app.get('/visitPlan', visitPlan_controller_1.default.getAll);
-app.get('/visitPlan/employee/:id', visitPlan_controller_1.default.getAllByEmployeeId);
-app.get('/visitPlan/:id', visitPlan_controller_1.default.getOne);
-app.put('/visitPlan/:id', visitPlan_controller_1.default.updateOne);
-app.delete('/visitPlan/:id', visitPlan_controller_1.default.deleteOne);
+//Weekly Visit Plan
+app.post('/weeklyVisitPlan/create', weeklyVisitPlan_controller_1.default.create);
+app.get('/weeklyVisitPlan', weeklyVisitPlan_controller_1.default.getAll);
+app.get('/weeklyVisitPlan/employee/:id', weeklyVisitPlan_controller_1.default.getAllByEmployeeId);
+app.get('/weeklyVisitPlan/:id', weeklyVisitPlan_controller_1.default.getOne);
+app.put('/weeklyVisitPlan/:id', weeklyVisitPlan_controller_1.default.updateOne);
+app.delete('/weeklyVisitPlan/:id', weeklyVisitPlan_controller_1.default.deleteOne);
+//Monthly Visit Plan
+app.post('/monthlyVisitPlan/create', monthlyVisitPlan_controller_1.default.create);
+app.get('/monthlyVisitPlan', monthlyVisitPlan_controller_1.default.getAll);
+app.get('/monthlyVisitPlan/employee/:id', monthlyVisitPlan_controller_1.default.getAllByEmployeeId);
+app.get('/monthlyVisitPlan/:id', monthlyVisitPlan_controller_1.default.getOne);
+app.put('/monthlyVisitPlan/:id', monthlyVisitPlan_controller_1.default.updateOne);
+app.delete('/monthlyVisitPlan/:id', monthlyVisitPlan_controller_1.default.deleteOne);
 app.post('/salesInvoice/create', salesInvoice_controller_1.default.create);
 app.get('/salesInvoice', salesInvoice_controller_1.default.getAll);
+app.get('/salesInvoice/employee/:id', salesInvoice_controller_1.default.getAllByEmployeeId);
 app.get('/salesInvoice/:id', salesInvoice_controller_1.default.getOne);
 app.put('/salesInvoice/:id', salesInvoice_controller_1.default.updateOne);
 app.delete('/salesInvoice/:id', salesInvoice_controller_1.default.deleteOne);
 app.post('/monthlyTarget/create', monthlyTarget_controller_1.default.create);
 app.get('/monthlyTarget', monthlyTarget_controller_1.default.getAll);
+app.get('/monthlyTarget/employee/:id', monthlyTarget_controller_1.default.getAllByEmployeeId);
 app.get('/monthlyTarget/:id', monthlyTarget_controller_1.default.getOne);
 app.put('/monthlyTarget/:id', monthlyTarget_controller_1.default.updateOne);
 app.delete('/monthlyTarget/:id', monthlyTarget_controller_1.default.deleteOne);
+app.get("/hello", (req, res) => {
+    res.send("This is your hello message");
+});
 exports.default = app;
 //# sourceMappingURL=app.js.map

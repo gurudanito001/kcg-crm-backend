@@ -26,6 +26,15 @@ class Controller {
                     })));
                     data.images = productImagesUrls;
                 }
+                if (data.brochures.length > 0) {
+                    return res.status(400).json({ message: "Brochures error" });
+                    let productBrochureUrls = yield Promise.all(data.brochures.map((base64Pdf) => __awaiter(this, void 0, void 0, function* () {
+                        let pdf = yield (0, imageService_1.uploadImage)({ data: base64Pdf });
+                        console.log(pdf.secure_url);
+                        return pdf.secure_url;
+                    })));
+                    data.brochures = productBrochureUrls;
+                }
                 let savedData = yield product_model_1.default.create(data);
                 if (savedData) {
                     return res.status(201).json({

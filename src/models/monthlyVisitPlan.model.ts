@@ -2,9 +2,9 @@ import { Sequelize, DataTypes, Model } from 'sequelize'
 import sequelize from "../dbConnection";
 
 
-  export default class VisitPlan extends Model { }
+  export default class MonthlyVisitPlan extends Model { }
 
-  VisitPlan.init({
+  MonthlyVisitPlan.init({
     // Model attributes are defined here
     id:{
       type: DataTypes.UUID,
@@ -15,12 +15,15 @@ import sequelize from "../dbConnection";
     },
     employeeId: {
       type: DataTypes.UUID,
+      allowNull: false
     },
-    weekStarting: {
-      type: DataTypes.TEXT,
+    month: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
-    monthlyVisitPlan: {
+    description: {
       type: DataTypes.TEXT,
+      allowNull: false
     },
     extraData: {
       type: DataTypes.JSONB,
@@ -28,8 +31,8 @@ import sequelize from "../dbConnection";
     
   }, {
     sequelize,
-    modelName: 'VisitPlan',
+    modelName: 'MonthlyVisitPlan',
   });
 
-  VisitPlan.sync().then(()=>console.log("VisitPlan was successfully synced"));
+  MonthlyVisitPlan.sync().then(()=>console.log("MonthlyVisitPlan was successfully synced"));
 

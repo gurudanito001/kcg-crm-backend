@@ -18,6 +18,10 @@ var MonthlyTarget = dbConnection_1.default.define('MonthlyTarget', {
         type: sequelize_1.DataTypes.UUID,
         allowNull: false,
     },
+    month: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
     monthlyTarget: {
         type: sequelize_1.DataTypes.JSONB,
     },

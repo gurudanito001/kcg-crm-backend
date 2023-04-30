@@ -21,7 +21,8 @@ import ProductController from './controllers/product.controller';
 import ProductGroupController from './controllers/productGroup.controller';
 import StaffCadreController from './controllers/staffCadre.controller';
 import VehicleDeliveryController from './controllers/vehicleDelivery.controller';
-import VisitPlanController from './controllers/visitPlan.controller';
+import WeeklyVisitPlanController from './controllers/weeklyVisitPlan.controller';
+import MonthlyVisitPlanController from './controllers/monthlyVisitPlan.controller';
 import SalesInvoiceController from './controllers/salesInvoice.controller';
 import MonthlyTargetController from './controllers/monthlyTarget.controller';
 
@@ -181,25 +182,39 @@ app.get('/vehicleDelivery/:id', VehicleDeliveryController.getOne);
 app.put('/vehicleDelivery/:id', VehicleDeliveryController.updateOne);
 app.delete('/vehicleDelivery/:id', VehicleDeliveryController.deleteOne);
 
-//Visit Plan
-app.post('/visitPlan/create', VisitPlanController.create);
-app.get('/visitPlan', VisitPlanController.getAll);
-app.get('/visitPlan/employee/:id', VisitPlanController.getAllByEmployeeId);
-app.get('/visitPlan/:id', VisitPlanController.getOne);
-app.put('/visitPlan/:id', VisitPlanController.updateOne);
-app.delete('/visitPlan/:id', VisitPlanController.deleteOne);
+//Weekly Visit Plan
+app.post('/weeklyVisitPlan/create', WeeklyVisitPlanController.create);
+app.get('/weeklyVisitPlan', WeeklyVisitPlanController.getAll);
+app.get('/weeklyVisitPlan/employee/:id', WeeklyVisitPlanController.getAllByEmployeeId);
+app.get('/weeklyVisitPlan/:id', WeeklyVisitPlanController.getOne);
+app.put('/weeklyVisitPlan/:id', WeeklyVisitPlanController.updateOne);
+app.delete('/weeklyVisitPlan/:id', WeeklyVisitPlanController.deleteOne);
+
+//Monthly Visit Plan
+app.post('/monthlyVisitPlan/create', MonthlyVisitPlanController.create);
+app.get('/monthlyVisitPlan', MonthlyVisitPlanController.getAll);
+app.get('/monthlyVisitPlan/employee/:id', MonthlyVisitPlanController.getAllByEmployeeId);
+app.get('/monthlyVisitPlan/:id', MonthlyVisitPlanController.getOne);
+app.put('/monthlyVisitPlan/:id', MonthlyVisitPlanController.updateOne);
+app.delete('/monthlyVisitPlan/:id', MonthlyVisitPlanController.deleteOne);
 
 app.post('/salesInvoice/create', SalesInvoiceController.create);
 app.get('/salesInvoice', SalesInvoiceController.getAll);
+app.get('/salesInvoice/employee/:id', SalesInvoiceController.getAllByEmployeeId);
 app.get('/salesInvoice/:id', SalesInvoiceController.getOne);
 app.put('/salesInvoice/:id', SalesInvoiceController.updateOne);
 app.delete('/salesInvoice/:id', SalesInvoiceController.deleteOne);
 
 app.post('/monthlyTarget/create', MonthlyTargetController.create);
 app.get('/monthlyTarget', MonthlyTargetController.getAll);
+app.get('/monthlyTarget/employee/:id', MonthlyTargetController.getAllByEmployeeId);
 app.get('/monthlyTarget/:id', MonthlyTargetController.getOne);
 app.put('/monthlyTarget/:id', MonthlyTargetController.updateOne);
 app.delete('/monthlyTarget/:id', MonthlyTargetController.deleteOne);
+
+app.get("/hello", (req, res) => {
+  res.send("This is your hello message")
+})
 
 
 export default app;

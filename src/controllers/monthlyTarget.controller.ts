@@ -52,6 +52,7 @@ class Controller {
     }
   }
 
+
   public async getOne(req: Request, res: Response){
     let id = req.params.id;
     try {

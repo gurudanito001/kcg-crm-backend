@@ -1,4 +1,4 @@
-import VisitPlan from "../models/monthlyVisitPlan.model";
+import MonthlyVisitPlan from "../models/monthlyVisitPlan.model";
 import Interfaces  from "../interfaces";
 import { Request, Response } from "express";
 
@@ -6,10 +6,10 @@ class Controller {
   public async create(req: Request, res: Response){
     let data = req.body;
     try {
-      let savedData = await VisitPlan.create(data); 
+      let savedData = await MonthlyVisitPlan.create(data); 
       if(savedData){
         return res.status(201).json({
-          message: "Visit Plan Created Successfully",
+          message: "Monthly Visit Plan Created Successfully",
           status: "success",
           statusCode: 201,
           payload: savedData
@@ -23,12 +23,12 @@ class Controller {
   public async getAll(req: Request, res: Response){
     let data = req.body;
     try {
-      let allData = await VisitPlan.findAll({
+      let allData = await MonthlyVisitPlan.findAll({
         order: [['createdAt', 'DESC']]
       }); 
       if(allData){
         return res.status(200).json({
-          message: "Visit Plan Fetched Successfully",
+          message: "Monthly Visit Plan Fetched Successfully",
           status: "success",
           statusCode: 200,
           payload: allData
@@ -42,13 +42,13 @@ class Controller {
   public async getAllByEmployeeId(req: Request, res: Response){
     let id = req.params.id;
     try {
-      let allData = await VisitPlan.findAll({
+      let allData = await MonthlyVisitPlan.findAll({
         where: {employeeId: id},
         order: [['createdAt', 'DESC']]
       }); 
       if(allData){
         return res.status(200).json({
-          message: "Visit Plans Fetched Successfully",
+          message: "Monthly Visit Plans Fetched Successfully",
           status: "success",
           statusCode: 200,
           payload: allData
@@ -62,16 +62,16 @@ class Controller {
   public async getOne(req: Request, res: Response){
     let id = req.params.id;
     try {
-      let oneData = await VisitPlan.findByPk(id); 
+      let oneData = await MonthlyVisitPlan.findByPk(id); 
       if(oneData){
         return res.status(200).json({
-          message: "Visit Plan Fetched Successfully",
+          message: "Monthly Visit Plan Fetched Successfully",
           status: "success",
           statusCode: 200,
           payload: oneData
         })
       }
-      return res.status(404).json({message: "Visit Plan not found"})
+      return res.status(404).json({message: "Monthly Visit Plan not found"})
     } catch (error: any) {
       return res.status(400).json({message: error.message})
     }
@@ -81,12 +81,12 @@ class Controller {
     let id = req.params.id;
     let data = req.body;
     try {
-      let updatedData = await VisitPlan.update(data, {
+      let updatedData = await MonthlyVisitPlan.update(data, {
         where: {id: id}
       }); 
       if(updatedData){
         return res.status(200).json({
-          message: "Visit Plan updated successfully",
+          message: "Monthly Visit Plan updated successfully",
           status: "success",
           statusCode: 200,
           payload: updatedData
@@ -100,12 +100,12 @@ class Controller {
   public async deleteOne(req: Request, res: Response){
     let id = req.params.id
     try {
-      let deletedData = await VisitPlan.destroy({
+      let deletedData = await MonthlyVisitPlan.destroy({
         where: {id: id}
       }); 
       if(deletedData){
         return res.status(200).json({
-          message: "Visit Plan deleted successfully",
+          message: "Monthly Visit Plan deleted successfully",
           status: "success",
           statusCode: 200,
           payload: deletedData
@@ -118,5 +118,5 @@ class Controller {
   
 }
 
-const VisitPlanController = new Controller()
-export default VisitPlanController
+const MonthlyVisitPlanController = new Controller()
+export default MonthlyVisitPlanController

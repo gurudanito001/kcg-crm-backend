@@ -5,7 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const dbConnection_1 = __importDefault(require("../dbConnection"));
-var SalesInvoice = dbConnection_1.default.define('SalesInvoice', {
+class WeeklyVisitPlan extends sequelize_1.Model {
+}
+exports.default = WeeklyVisitPlan;
+WeeklyVisitPlan.init({
     // Model attributes are defined here
     id: {
         type: sequelize_1.DataTypes.UUID,
@@ -14,32 +17,28 @@ var SalesInvoice = dbConnection_1.default.define('SalesInvoice', {
         allowNull: false,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
     },
-    customerId: {
-        type: sequelize_1.DataTypes.UUID,
-        allowNull: false,
-    },
     employeeId: {
         type: sequelize_1.DataTypes.UUID,
-        allowNull: false,
+        allowNull: false
     },
-    invoiceRequestId: {
-        type: sequelize_1.DataTypes.UUID,
-        allowNull: false,
-    },
-    pdfUrl: {
+    week: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "PDF URL is required" }
-        }
+        allowNull: false
+    },
+    month: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
     },
     description: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.TEXT,
+        allowNull: false
     },
     extraData: {
         type: sequelize_1.DataTypes.JSONB,
     }
+}, {
+    sequelize: dbConnection_1.default,
+    modelName: 'WeeklyVisitPlan',
 });
-SalesInvoice.sync().then(() => console.log("SalesInvoice was successfully synced"));
-exports.default = SalesInvoice;
-//# sourceMappingURL=salesInvoice.model.js.map
+WeeklyVisitPlan.sync().then(() => console.log("WeeklyVisitPlan was successfully synced"));
+//# sourceMappingURL=weeklyVisitPlan.model.js.map

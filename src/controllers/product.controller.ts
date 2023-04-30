@@ -16,6 +16,18 @@ class Controller {
         )
         data.images = productImagesUrls;
       }
+
+      if(data.brochures.length > 0){
+        return res.status(400).json({message: "Brochures error"})
+        let productBrochureUrls = await Promise.all(
+          data.brochures.map(async (base64Pdf: any) => {
+            let pdf = await uploadImage({data: base64Pdf});
+            console.log(pdf.secure_url)
+            return pdf.secure_url;
+          })
+        )
+        data.brochures = productBrochureUrls;
+      }
       
       let savedData = await Product.create(data); 
       if(savedData){

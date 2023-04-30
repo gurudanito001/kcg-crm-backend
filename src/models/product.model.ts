@@ -41,7 +41,7 @@ import sequelize from "../dbConnection";
       type: DataTypes.STRING,
     },
     brochures: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.ARRAY(DataTypes.TEXT),
     },
     images: {
       type: DataTypes.ARRAY(DataTypes.STRING),

@@ -34,6 +34,24 @@ class Controller {
     }
   }
 
+  public async getAllByEmployeeId(req: Request, res: Response){
+    let id = req.params.id
+    try {
+      let allData = await SalesInvoice.findAll({
+        where: {employeeId: id},
+        order: [['createdAt', 'DESC']]
+      }); 
+      return res.status(200).json({
+        message: "Sales Invoices Fetched Successfully",
+        status: "success",
+        statusCode: 200,
+        payload: allData
+      })
+    } catch (error: any) {
+      return res.status(400).json({message: error.message})
+    }
+  }
+
   public async getOne(req: Request, res: Response){
     let id = req.params.id;
     try {

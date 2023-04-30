@@ -5,10 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const dbConnection_1 = __importDefault(require("../dbConnection"));
-class VisitPlan extends sequelize_1.Model {
+class MonthlyVisitPlan extends sequelize_1.Model {
 }
-exports.default = VisitPlan;
-VisitPlan.init({
+exports.default = MonthlyVisitPlan;
+MonthlyVisitPlan.init({
     // Model attributes are defined here
     id: {
         type: sequelize_1.DataTypes.UUID,
@@ -19,19 +19,22 @@ VisitPlan.init({
     },
     employeeId: {
         type: sequelize_1.DataTypes.UUID,
+        allowNull: false
     },
-    weekStarting: {
-        type: sequelize_1.DataTypes.TEXT,
+    month: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
     },
-    monthlyVisitPlan: {
+    description: {
         type: sequelize_1.DataTypes.TEXT,
+        allowNull: false
     },
     extraData: {
         type: sequelize_1.DataTypes.JSONB,
     }
 }, {
     sequelize: dbConnection_1.default,
-    modelName: 'VisitPlan',
+    modelName: 'MonthlyVisitPlan',
 });
-VisitPlan.sync().then(() => console.log("VisitPlan was successfully synced"));
-//# sourceMappingURL=visitPlan.model.js.map
+MonthlyVisitPlan.sync().then(() => console.log("MonthlyVisitPlan was successfully synced"));
+//# sourceMappingURL=monthlyVisitPlan.model.js.map

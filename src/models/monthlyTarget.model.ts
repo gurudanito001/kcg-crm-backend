@@ -14,6 +14,10 @@ var MonthlyTarget = sequelize.define('MonthlyTarget', {
     type: DataTypes.UUID,
     allowNull: false,
   },
+  month: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   monthlyTarget: {
     type: DataTypes.JSONB,
   },

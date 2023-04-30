@@ -10,18 +10,23 @@ var SalesInvoice = sequelize.define('SalesInvoice', {
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
-    name: {
-      type: DataTypes.STRING,
+    customerId: {
+      type: DataTypes.UUID,
       allowNull: false,
-      validate: {
-        notEmpty: { msg: "Invoice Name is required"}
-      }
     },
-    url: {
+    employeeId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    invoiceRequestId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    pdfUrl: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: { msg: "Invoice URL is required"}
+        notEmpty: { msg: "PDF URL is required"}
       }
     },
     description: {

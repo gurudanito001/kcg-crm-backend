@@ -45,7 +45,7 @@ Product.init({
         type: sequelize_1.DataTypes.STRING,
     },
     brochures: {
-        type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
+        type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.TEXT),
     },
     images: {
         type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
