@@ -25,6 +25,10 @@ PfiRequestForm.init({
         type: sequelize_1.DataTypes.UUID,
         allowNull: false,
     },
+    customerType: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
     companyName: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
@@ -42,47 +46,12 @@ PfiRequestForm.init({
     emailAddress: {
         type: sequelize_1.DataTypes.STRING,
     },
-    productBrand: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    vehicleModel: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    bodyTypeDescription: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    vehicleServiceDetails: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    vehicleSpecialFitmentDetails: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    costOfBodySpecialFitment: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    quantity: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    priceOfVehicle: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    discount: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    vatDeduction: {
-        type: sequelize_1.DataTypes.BOOLEAN,
-    },
-    whtDeduction: {
-        type: sequelize_1.DataTypes.BOOLEAN,
-    },
-    refundRebaseAmount: {
-        type: sequelize_1.DataTypes.STRING,
+    pfiVehiclesData: {
+        type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSON),
+        defaultValue: []
     },
     refundRebaseRecipient: {
         type: sequelize_1.DataTypes.STRING,
-    },
-    registration: {
-        type: sequelize_1.DataTypes.BOOLEAN,
     },
     designation: {
         type: sequelize_1.DataTypes.STRING,
@@ -106,11 +75,8 @@ PfiRequestForm.init({
         type: sequelize_1.DataTypes.BOOLEAN,
         defaultValue: false
     },
-    approvedBy: {
-        type: sequelize_1.DataTypes.JSONB
-    },
     additionalInformation: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.TEXT,
     },
     extraData: {
         type: sequelize_1.DataTypes.JSONB,
@@ -119,5 +85,5 @@ PfiRequestForm.init({
     sequelize: dbConnection_1.default,
     modelName: 'PfiRequestForm',
 });
-PfiRequestForm.sync().then(() => console.log("PfiRequestForm was successfully synced"));
+PfiRequestForm.sync({ force: true }).then(() => console.log("PfiRequestForm was successfully synced"));
 //# sourceMappingURL=pfiRequestForm.model.js.map

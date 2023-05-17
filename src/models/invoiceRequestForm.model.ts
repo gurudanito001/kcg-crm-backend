@@ -17,6 +17,10 @@ import sequelize from "../dbConnection";
       type: DataTypes.UUID,
       allowNull: false,
     },
+    customerType: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     customerId: {
       type: DataTypes.UUID,
       allowNull: false,
@@ -58,26 +62,9 @@ import sequelize from "../dbConnection";
     kycId: {
       type: DataTypes.STRING,
     },
-    vehicleBrand: {
-      type: DataTypes.STRING,
-    },
-    vehicleModel: {
-      type: DataTypes.STRING,
-    },
-    quantity: {
-      type: DataTypes.STRING,
-    },
-    colour: {
-      type: DataTypes.STRING,
-    },
-    totalInvoiceValuePerVehicle: {
-      type: DataTypes.STRING,
-    },
-    typeOfBodyBuilding: {
-      type: DataTypes.STRING,
-    },
-    bodyFabricatorName: {
-      type: DataTypes.STRING,
+    vehiclesData: {
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      defaultValue: []
     },
     expectedDeliveryDate: {
       type: DataTypes.STRING,
@@ -85,17 +72,8 @@ import sequelize from "../dbConnection";
     deliveryLocation: {
       type: DataTypes.STRING,
     },
-    registration: {
-      type: DataTypes.STRING,
-    },
     deliveryBy: {
       type: DataTypes.STRING,
-    },
-    vatDeduction: {
-      type: DataTypes.BOOLEAN,
-    },
-    whtDeduction: {
-      type: DataTypes.BOOLEAN,
     },
     paymentStatus: {
       type: DataTypes.STRING,
@@ -106,16 +84,10 @@ import sequelize from "../dbConnection";
     lpoPdf: {
       type: DataTypes.STRING,
     },
-    warrantyCertificate: {
-      type: DataTypes.STRING,
-    },
     agreedCreditPeriod: {
       type: DataTypes.STRING,
     },
     rebateReceiver: {
-      type: DataTypes.STRING,
-    },
-    rebateAmount: {
       type: DataTypes.STRING,
     },
     relationshipWithTransaction: {
@@ -127,18 +99,19 @@ import sequelize from "../dbConnection";
     refundToCustomer: {
       type: DataTypes.STRING,
     },
-    servicePackageDetails: {
-      type: DataTypes.STRING,
-    },
     approved: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
-    approvedBy: {
+    warrantyCertificate: {
+      type: DataTypes.STRING
+    },
+    approvedByGM: {
       type: DataTypes.JSON,
+      defaultValue: false
     },
     additionalInformation: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     extraData: {
       type: DataTypes.JSONB,
@@ -148,5 +121,5 @@ import sequelize from "../dbConnection";
     modelName: 'InvoiceRequestForm',
   });
 
-  InvoiceRequestForm.sync().then(()=>console.log("InvoiceRequestForm was successfully synced"));
+  InvoiceRequestForm.sync({force: true}).then(()=>console.log("InvoiceRequestForm was successfully synced"));
 

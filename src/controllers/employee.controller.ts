@@ -43,6 +43,27 @@ class Controller {
     }
   }
 
+  public async getAllSubordinates(req: Request, res: Response){
+    let data = req.body;
+    let id = req.params.id
+    try {
+      let allData = await Employee.findAll({
+        where: {supervisor: id},
+        order: [['createdAt', 'DESC']]
+      }); 
+      if(allData){
+        return res.status(200).json({
+          message: "Subordinates Fetched Successfully",
+          status: "success",
+          statusCode: 200,
+          payload: allData
+        })
+      }
+    } catch (error: any) {
+      return res.status(400).json({message: error.message})
+    }
+  }
+
   public async getOne(req: Request, res: Response){
     let id = req.params.id;
     try {

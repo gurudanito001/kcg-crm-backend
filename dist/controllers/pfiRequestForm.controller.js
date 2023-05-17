@@ -34,7 +34,6 @@ class Controller {
                         return res.status(400).json({ message: "Could not create new Contact Person" });
                     }
                 }
-                delete data.customerType;
                 let savedData = yield pfiRequestForm_model_1.default.create(data);
                 if (savedData) {
                     return res.status(201).json({

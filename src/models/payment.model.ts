@@ -66,7 +66,7 @@ import sequelize from "../dbConnection";
       type: DataTypes.STRING,
     },
     additionalInformation: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     extraData: {
       type: DataTypes.JSONB,

@@ -21,6 +21,10 @@ import sequelize from "../dbConnection";
       type: DataTypes.UUID,
       allowNull: false,
     },
+    customerType: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     companyName: {
       type: DataTypes.STRING,
       allowNull: false
@@ -38,47 +42,12 @@ import sequelize from "../dbConnection";
     emailAddress: {
       type: DataTypes.STRING,
     },
-    productBrand: {
-      type: DataTypes.STRING,
-    },
-    vehicleModel: {
-      type: DataTypes.STRING,
-    },
-    bodyTypeDescription: {
-      type: DataTypes.STRING,
-    },
-    vehicleServiceDetails: {
-      type: DataTypes.STRING,
-    },
-    vehicleSpecialFitmentDetails: {
-      type: DataTypes.STRING,
-    },
-    costOfBodySpecialFitment: {
-      type: DataTypes.STRING,
-    },
-    quantity: {
-      type: DataTypes.STRING,
-    },
-    priceOfVehicle: {
-      type: DataTypes.STRING,
-    },
-    discount: {
-      type: DataTypes.STRING,
-    },
-    vatDeduction: {
-      type: DataTypes.BOOLEAN,
-    },
-    whtDeduction: {
-      type: DataTypes.BOOLEAN,
-    },
-    refundRebaseAmount: {
-      type: DataTypes.STRING,
+    pfiVehiclesData: {
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      defaultValue: []
     },
     refundRebaseRecipient: {
       type: DataTypes.STRING,
-    },
-    registration: {
-      type: DataTypes.BOOLEAN,
     },
     designation: {
       type: DataTypes.STRING,
@@ -102,11 +71,8 @@ import sequelize from "../dbConnection";
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
-    approvedBy: {
-      type: DataTypes.JSONB
-    },
     additionalInformation: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     extraData: {
       type: DataTypes.JSONB,
@@ -116,5 +82,5 @@ import sequelize from "../dbConnection";
     modelName: 'PfiRequestForm',
   });
 
-  PfiRequestForm.sync().then(()=>console.log("PfiRequestForm was successfully synced"));
+  PfiRequestForm.sync({force: true}).then(()=>console.log("PfiRequestForm was successfully synced"));
 

@@ -21,6 +21,10 @@ InvoiceRequestForm.init({
         type: sequelize_1.DataTypes.UUID,
         allowNull: false,
     },
+    customerType: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
     customerId: {
         type: sequelize_1.DataTypes.UUID,
         allowNull: false,
@@ -62,26 +66,9 @@ InvoiceRequestForm.init({
     kycId: {
         type: sequelize_1.DataTypes.STRING,
     },
-    vehicleBrand: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    vehicleModel: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    quantity: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    colour: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    totalInvoiceValuePerVehicle: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    typeOfBodyBuilding: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    bodyFabricatorName: {
-        type: sequelize_1.DataTypes.STRING,
+    vehiclesData: {
+        type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSON),
+        defaultValue: []
     },
     expectedDeliveryDate: {
         type: sequelize_1.DataTypes.STRING,
@@ -89,17 +76,8 @@ InvoiceRequestForm.init({
     deliveryLocation: {
         type: sequelize_1.DataTypes.STRING,
     },
-    registration: {
-        type: sequelize_1.DataTypes.STRING,
-    },
     deliveryBy: {
         type: sequelize_1.DataTypes.STRING,
-    },
-    vatDeduction: {
-        type: sequelize_1.DataTypes.BOOLEAN,
-    },
-    whtDeduction: {
-        type: sequelize_1.DataTypes.BOOLEAN,
     },
     paymentStatus: {
         type: sequelize_1.DataTypes.STRING,
@@ -110,16 +88,10 @@ InvoiceRequestForm.init({
     lpoPdf: {
         type: sequelize_1.DataTypes.STRING,
     },
-    warrantyCertificate: {
-        type: sequelize_1.DataTypes.STRING,
-    },
     agreedCreditPeriod: {
         type: sequelize_1.DataTypes.STRING,
     },
     rebateReceiver: {
-        type: sequelize_1.DataTypes.STRING,
-    },
-    rebateAmount: {
         type: sequelize_1.DataTypes.STRING,
     },
     relationshipWithTransaction: {
@@ -131,18 +103,19 @@ InvoiceRequestForm.init({
     refundToCustomer: {
         type: sequelize_1.DataTypes.STRING,
     },
-    servicePackageDetails: {
-        type: sequelize_1.DataTypes.STRING,
-    },
     approved: {
         type: sequelize_1.DataTypes.BOOLEAN,
         defaultValue: false
     },
-    approvedBy: {
+    warrantyCertificate: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    approvedByGM: {
         type: sequelize_1.DataTypes.JSON,
+        defaultValue: false
     },
     additionalInformation: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.TEXT,
     },
     extraData: {
         type: sequelize_1.DataTypes.JSONB,
@@ -151,5 +124,5 @@ InvoiceRequestForm.init({
     sequelize: dbConnection_1.default,
     modelName: 'InvoiceRequestForm',
 });
-InvoiceRequestForm.sync().then(() => console.log("InvoiceRequestForm was successfully synced"));
+InvoiceRequestForm.sync({ force: true }).then(() => console.log("InvoiceRequestForm was successfully synced"));
 //# sourceMappingURL=invoiceRequestForm.model.js.map

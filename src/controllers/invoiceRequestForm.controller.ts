@@ -87,7 +87,7 @@ class Controller {
     let id = req.params.id;
     let data = req.body;
     try {
-      if(data.warrantyCertificate.startsWith("data:image")){
+      if(data?.warrantyCertificate?.startsWith("data:image")){
         let result = await uploadImage({ data: data.warrantyCertificate });
         if(!result){
           return res.status(400).json({message: "Could not Save Image"})

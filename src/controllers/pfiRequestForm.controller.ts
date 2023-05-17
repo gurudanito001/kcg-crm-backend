@@ -22,7 +22,6 @@ class Controller {
           return res.status(400).json({message: "Could not create new Contact Person"})
         }
       }
-      delete data.customerType;
       let savedData = await PfiRequestForm.create(data); 
       if(savedData){
         return res.status(201).json({

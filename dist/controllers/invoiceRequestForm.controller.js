@@ -103,11 +103,12 @@ class Controller {
         });
     }
     updateOne(req, res) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
             let data = req.body;
             try {
-                if (data.warrantyCertificate.startsWith("data:image")) {
+                if ((_a = data === null || data === void 0 ? void 0 : data.warrantyCertificate) === null || _a === void 0 ? void 0 : _a.startsWith("data:image")) {
                     let result = yield (0, imageService_1.uploadImage)({ data: data.warrantyCertificate });
                     if (!result) {
                         return res.status(400).json({ message: "Could not Save Image" });

@@ -70,7 +70,7 @@ Payment.init({
         type: sequelize_1.DataTypes.STRING,
     },
     additionalInformation: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.TEXT,
     },
     extraData: {
         type: sequelize_1.DataTypes.JSONB,

@@ -104,6 +104,7 @@ app.delete('/customerVisitReport/:id', customerVisitReport_controller_1.default.
 //Employee
 app.post('/employee/create', employee_controller_1.default.create);
 app.get('/employee', employee_controller_1.default.getAll);
+app.get('/employee/subordinates/:id', employee_controller_1.default.getAllSubordinates);
 app.get('/employee/:id', employee_controller_1.default.getOne);
 app.put('/employee/:id', employee_controller_1.default.updateOne);
 app.delete('/employee/:id', employee_controller_1.default.deleteOne);

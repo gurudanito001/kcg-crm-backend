@@ -57,6 +57,29 @@ class Controller {
             }
         });
     }
+    getAllSubordinates(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let data = req.body;
+            let id = req.params.id;
+            try {
+                let allData = yield employee_model_1.default.findAll({
+                    where: { supervisor: id },
+                    order: [['createdAt', 'DESC']]
+                });
+                if (allData) {
+                    return res.status(200).json({
+                        message: "Subordinates Fetched Successfully",
+                        status: "success",
+                        statusCode: 200,
+                        payload: allData
+                    });
+                }
+            }
+            catch (error) {
+                return res.status(400).json({ message: error.message });
+            }
+        });
+    }
     getOne(req, res) {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
         return __awaiter(this, void 0, void 0, function* () {
