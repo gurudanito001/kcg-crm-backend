@@ -82,5 +82,5 @@ import sequelize from "../dbConnection";
     modelName: 'PfiRequestForm',
   });
 
-  PfiRequestForm.sync({force: true}).then(()=>console.log("PfiRequestForm was successfully synced"));
+  PfiRequestForm.sync().then(()=>console.log("PfiRequestForm was successfully synced"));
 

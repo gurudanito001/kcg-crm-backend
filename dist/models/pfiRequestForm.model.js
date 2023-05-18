@@ -85,5 +85,5 @@ PfiRequestForm.init({
     sequelize: dbConnection_1.default,
     modelName: 'PfiRequestForm',
 });
-PfiRequestForm.sync({ force: true }).then(() => console.log("PfiRequestForm was successfully synced"));
+PfiRequestForm.sync().then(() => console.log("PfiRequestForm was successfully synced"));
 //# sourceMappingURL=pfiRequestForm.model.js.map

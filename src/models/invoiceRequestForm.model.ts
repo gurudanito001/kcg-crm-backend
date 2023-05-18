@@ -121,5 +121,5 @@ import sequelize from "../dbConnection";
     modelName: 'InvoiceRequestForm',
   });
 
-  InvoiceRequestForm.sync({force: true}).then(()=>console.log("InvoiceRequestForm was successfully synced"));
+  InvoiceRequestForm.sync().then(()=>console.log("InvoiceRequestForm was successfully synced"));
 

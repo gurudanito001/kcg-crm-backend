@@ -124,5 +124,5 @@ InvoiceRequestForm.init({
     sequelize: dbConnection_1.default,
     modelName: 'InvoiceRequestForm',
 });
-InvoiceRequestForm.sync({ force: true }).then(() => console.log("InvoiceRequestForm was successfully synced"));
+InvoiceRequestForm.sync().then(() => console.log("InvoiceRequestForm was successfully synced"));
 //# sourceMappingURL=invoiceRequestForm.model.js.map

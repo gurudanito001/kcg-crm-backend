@@ -13,27 +13,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const pfiRequestForm_model_1 = __importDefault(require("../models/pfiRequestForm.model"));
-const customer_model_1 = __importDefault(require("../models/customer.model"));
-const contactPerson_model_1 = __importDefault(require("../models/contactPerson.model"));
 class Controller {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let data = req.body;
             let newCustomer, newContactPerson;
             try {
-                if (data.customerType === "new customer") {
-                    let { companyAddress, companyName, employeeId, contactPerson, mobile, designation, emailAddress } = data;
-                    newCustomer = yield customer_model_1.default.create({ employeeId, companyName, address1: companyAddress });
-                    if (!newCustomer) {
-                        return res.status(400).json({ message: "Could not create new Customer" });
-                    }
-                    data.customerId = newCustomer.id;
-                    let names = contactPerson.split(" ");
-                    newContactPerson = yield contactPerson_model_1.default.create({ employeeId, customerId: newCustomer === null || newCustomer === void 0 ? void 0 : newCustomer.id, firstName: names[0], lastName: names[1], email: emailAddress, phoneNumber1: mobile, designation });
-                    if (!newContactPerson) {
-                        return res.status(400).json({ message: "Could not create new Contact Person" });
-                    }
-                }
+                /* if(data.customerType === "new customer"){
+                  let {companyAddress, companyName, employeeId, contactPerson, mobile, designation, emailAddress} = data;
+                  newCustomer = await Customer.create({employeeId, companyName, address1: companyAddress});
+                  if(!newCustomer){
+                    return res.status(400).json({message: "Could not create new Customer"})
+                  }
+                  data.customerId = newCustomer.id;
+                  let names = contactPerson.split(" ");
+                  newContactPerson = await ContactPerson.create({employeeId, customerId: newCustomer?.id, firstName: names[0], lastName: names[1], email: emailAddress, phoneNumber1: mobile, designation })
+                  if(!newContactPerson){
+                    return res.status(400).json({message: "Could not create new Contact Person"})
+                  }
+                } */
                 let savedData = yield pfiRequestForm_model_1.default.create(data);
                 if (savedData) {
                     return res.status(201).json({

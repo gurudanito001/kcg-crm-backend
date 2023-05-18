@@ -9,7 +9,7 @@ class Controller {
     let data = req.body;
     let newCustomer: any, newContactPerson
     try {
-      if(data.customerType === "new customer"){
+      /* if(data.customerType === "new customer"){
         let {companyAddress, companyName, employeeId, contactPerson, mobile, designation, emailAddress} = data;
         newCustomer = await Customer.create({employeeId, companyName, address1: companyAddress});
         if(!newCustomer){
@@ -21,7 +21,7 @@ class Controller {
         if(!newContactPerson){
           return res.status(400).json({message: "Could not create new Contact Person"})
         }
-      }
+      } */
       let savedData = await PfiRequestForm.create(data); 
       if(savedData){
         return res.status(201).json({
