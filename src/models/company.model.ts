@@ -34,10 +34,6 @@ var Company = sequelize.define('Company', {
     },
     logo: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: { msg: "logo is required"}
-      }
     },
     email: {
       type: DataTypes.STRING,
@@ -50,10 +46,6 @@ var Company = sequelize.define('Company', {
     },
     brands: {
       type: DataTypes.ARRAY(DataTypes.JSON),
-      allowNull: false,
-      validate: {
-        notEmpty:{ msg: "List of brands is required"},
-      }
     },
     extraData: {
       type: DataTypes.JSONB,

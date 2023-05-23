@@ -20,13 +20,13 @@ class Controller {
         return __awaiter(this, void 0, void 0, function* () {
             let data = req.body;
             try {
-                let result = yield (0, imageService_1.uploadImage)({ data: data.logo });
-                if (!result) {
-                    return res.status(400).json({ message: "Could not Save Logo" });
+                let result;
+                if (req.body.logo.startsWith("data:image")) {
+                    result = yield (0, imageService_1.uploadImage)({ data: req.body.logo });
                 }
                 data.logo = result.secure_url;
                 let savedData = yield company_model_1.default.create(data);
-                return res.status(201).json({
+                res.status(201).json({
                     message: "Company Created Successfully",
                     status: "success",
                     statusCode: 201,

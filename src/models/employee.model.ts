@@ -37,10 +37,6 @@ import sequelize from "../dbConnection";
     },
     branchId: {
       type: DataTypes.UUID,
-      allowNull: false,
-      validate: {
-        notEmpty:{ msg: "branchId is required"},
-      }
     },
     firstName: {
       type: DataTypes.STRING,

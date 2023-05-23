@@ -38,10 +38,6 @@ var Company = dbConnection_1.default.define('Company', {
     },
     logo: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "logo is required" }
-        }
     },
     email: {
         type: sequelize_1.DataTypes.STRING,
@@ -54,10 +50,6 @@ var Company = dbConnection_1.default.define('Company', {
     },
     brands: {
         type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSON),
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "List of brands is required" },
-        }
     },
     extraData: {
         type: sequelize_1.DataTypes.JSONB,

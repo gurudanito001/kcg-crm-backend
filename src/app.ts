@@ -214,7 +214,7 @@ app.put('/monthlyTarget/:id', MonthlyTargetController.updateOne);
 app.delete('/monthlyTarget/:id', MonthlyTargetController.deleteOne);
 
 app.get("/hello", (req, res) => {
-  res.send("This is your hello message")
+  res.send("This is your hello message");
 })
 
 

@@ -8,19 +8,21 @@ class Controller {
   public async create(req: Request, res: Response){
     let data = req.body;
     try {
-      let result = await uploadImage({ data: data.logo });
-      if(!result){
-        return res.status(400).json({message: "Could not Save Logo"})
+      let result;
+      if(req.body.logo.startsWith("data:image")){
+        result = await uploadImage({ data: req.body.logo });
       }
       data.logo = result.secure_url
-      let savedData = await Company.create(data);
-      
-      return res.status(201).json({
+      let savedData: any = await Company.create(data);
+      res.status(201).json({
         message: "Company Created Successfully",
         status: "success",
         statusCode: 201,
         payload: savedData
       })
+
+      
+      
     } catch (error: any) {
       return res.status(400).json({message: error.message})
     }

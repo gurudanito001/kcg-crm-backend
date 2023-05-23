@@ -40,10 +40,6 @@ Employee.init({
     },
     branchId: {
         type: sequelize_1.DataTypes.UUID,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: "branchId is required" },
-        }
     },
     firstName: {
         type: sequelize_1.DataTypes.STRING,
